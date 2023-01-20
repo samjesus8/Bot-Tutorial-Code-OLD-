@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using YouTubeTestBot.Commands;
 
 namespace YouTubeTestBot
 {
@@ -28,6 +29,7 @@ namespace YouTubeTestBot
 
             var config = new DiscordConfiguration()
             {
+                Intents = DiscordIntents.All,
                 Token = configJson.Token,
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
@@ -44,7 +46,12 @@ namespace YouTubeTestBot
                 StringPrefixes = new string[] { configJson.Prefix },
                 EnableMentionPrefix = true,
                 EnableDms = true,
+                EnableDefaultHelp = false,
             };
+
+            Commands = Client.UseCommandsNext(commandsConfig);
+
+            Commands.RegisterCommands<FunCommands>();
 
             await Client.ConnectAsync();
             await Task.Delay(-1);
