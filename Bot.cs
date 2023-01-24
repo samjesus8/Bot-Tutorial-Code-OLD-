@@ -52,6 +52,7 @@ namespace YouTubeTestBot
             Commands = Client.UseCommandsNext(commandsConfig);
 
             Commands.RegisterCommands<FunCommands>();
+            Commands.RegisterCommands<GameCommands>();
 
             await Client.ConnectAsync();
             await Task.Delay(-1);

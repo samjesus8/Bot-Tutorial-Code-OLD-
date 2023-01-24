@@ -150,7 +150,9 @@
   <ItemGroup>
     <Compile Include="Bot.cs" />
     <Compile Include="Commands\FunCommands.cs" />
+    <Compile Include="Commands\GameCommands.cs" />
     <Compile Include="ConfigJSON.cs" />
+    <Compile Include="External Classes\CardBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,31 +1,29 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
-using System;
+using DSharpPlus.Entities;
 using System.Threading.Tasks;
 
 namespace YouTubeTestBot.Commands
 {
     public class FunCommands : BaseCommandModule
     {
-        [Command("test")]
+        [Command("message")]
         public async Task TestCommand(CommandContext ctx) 
         {
-            Console.WriteLine("working");
             await ctx.Channel.SendMessageAsync("Hello");
         }
 
-        [Command("add")]
-        public async Task Addition(CommandContext ctx, int number1, int number2) 
+        [Command("embedmessage")]
+        public async Task SendEmbedMessage(CommandContext ctx) 
         {
-            int answer = number1 + number2;
-            await ctx.Channel.SendMessageAsync(answer.ToString());
-        }
+            var embedMessage = new DiscordEmbedBuilder()
+            {
+                Title = "This is a title",
+                Description = "This is a description",
+                Color = DiscordColor.Aquamarine,
+            };
 
-        [Command("subtract")]
-        public async Task Subtract(CommandContext ctx, int number1, int number2)
-        {
-            int answer = number1 - number2;
-            await ctx.Channel.SendMessageAsync(answer.ToString());
+            await ctx.Channel.SendMessageAsync(embed: embedMessage);
         }
     }
 }
