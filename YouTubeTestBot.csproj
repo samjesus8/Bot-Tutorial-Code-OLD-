@@ -151,14 +151,14 @@
     <Compile Include="Bot.cs" />
     <Compile Include="Commands\FunCommands.cs" />
     <Compile Include="Commands\GameCommands.cs" />
-    <Compile Include="ConfigJSON.cs" />
+    <Compile Include="Config\ConfigJSON.cs" />
     <Compile Include="External Classes\CardBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="config.json" />
+    <None Include="Config\config.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

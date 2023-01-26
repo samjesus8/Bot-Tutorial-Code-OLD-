@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace YouTubeTestBot
+namespace YouTubeTestBot.Config
 {
     internal struct ConfigJSON
     {
