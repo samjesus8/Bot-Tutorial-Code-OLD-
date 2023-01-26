@@ -13,7 +13,7 @@ This Bot is being coded in a YouTube tutorial series by SamJesus8. He will teach
 
 This is a good insight for people wanting to code a Discord Bot, or learners who are learning C# and want to take on more complex projects. This tutorial alone will also cover a lot of C# coding tips & tricks as well as some fundamentals to coding in C# such as the use of Classes, StreamReaders, Asynchronous Logic and a lot more key components in the coding language.
 
-There is a lot of interchange between coding in C# and learning to make a Discord Bot so be sure to give it your all wen coding your own
+There is a lot of interchange between coding in C# and learning to make a Discord Bot so be sure to give it your all when coding your own
 
 [Watch the Tutorial Here](https://www.youtube.com/playlist?list=PLcpUxmcrEm_Bn4K-kcE9ebsQPvNcR8KZx)
 
