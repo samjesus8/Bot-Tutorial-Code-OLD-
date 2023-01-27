@@ -11,9 +11,9 @@ namespace YouTubeTestBot.Commands
         [Command("cardgame")]
         public async Task SimpleCardGame(CommandContext ctx) 
         {
-            var UserCard = new CardBuilder();
+            var UserCard = new CardBuilder(); //Creating an instance of a card for the user
 
-            var userCardMessage = new DiscordMessageBuilder()
+            var userCardMessage = new DiscordMessageBuilder() //Displaying the User's card in an embed
                 .AddEmbed(new DiscordEmbedBuilder()
 
                 .WithColor(DiscordColor.Azure)
@@ -23,7 +23,7 @@ namespace YouTubeTestBot.Commands
 
             await ctx.Channel.SendMessageAsync(userCardMessage);
 
-            var BotCard = new CardBuilder();
+            var BotCard = new CardBuilder(); //Creating an instance of a card for the Bot
 
             var botCardMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
@@ -35,7 +35,7 @@ namespace YouTubeTestBot.Commands
 
             await ctx.Channel.SendMessageAsync(botCardMessage);
 
-            if (UserCard.SelectedNumber > BotCard.SelectedNumber) 
+            if (UserCard.SelectedNumber > BotCard.SelectedNumber) //Comparing the two cards
             {
                 //The user wins
                 var winningMessage = new DiscordEmbedBuilder()
