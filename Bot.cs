@@ -1,5 +1,8 @@
 ﻿using DSharpPlus;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.CommandsNext.Exceptions;
+using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
@@ -55,8 +58,35 @@ namespace YouTubeTestBot
             Commands.RegisterCommands<FunCommands>();
             Commands.RegisterCommands<GameCommands>();
 
+            Commands.CommandErrored += OnCommandError;
+
             await Client.ConnectAsync();
             await Task.Delay(-1);
+        }
+
+        private async Task OnCommandError(CommandsNextExtension sender, CommandErrorEventArgs e)
+        {
+            if (e.Exception is ChecksFailedException) 
+            {
+                var castedException = (ChecksFailedException)e.Exception;
+                string cooldownTimer = string.Empty;
+
+                foreach (var check in castedException.FailedChecks)
+                {
+                    var cooldown = (CooldownAttribute)check;
+                    TimeSpan timeLeft = cooldown.GetRemainingCooldown(e.Context);
+                    cooldownTimer = timeLeft.ToString(@"hh\:mm\:ss");
+                }
+
+                var cooldownMessage = new DiscordEmbedBuilder()
+                {
+                    Title = "Wait for the Cooldown to End",
+                    Description = "Remaining Time: " + cooldownTimer,
+                    Color = DiscordColor.Red
+                };
+
+                await e.Context.Channel.SendMessageAsync(embed: cooldownMessage);
+            }
         }
 
         private Task OnClientReady(ReadyEventArgs e) 
