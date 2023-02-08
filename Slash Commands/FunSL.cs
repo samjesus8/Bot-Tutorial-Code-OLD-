@@ -11,8 +11,7 @@ namespace YouTubeTestBot.Slash_Commands
     {
         [SlashCommand("test", "This is our first Slash Command")]
         public async Task TestSlashCommand(InteractionContext ctx, [Choice("Pre-Defined Text", "afhajfjafjdghldghlhg")]
-                                                                   [Option("string", "Type in anything you want")] string text,
-                                                                   [Option("picture", "Send a picture")] DiscordAttachment picture)
+                                                                   [Option("string", "Type in anything you want")] string text)
         {
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
                                                                                             .WithContent("Starting Slash Command...."));
@@ -20,7 +19,6 @@ namespace YouTubeTestBot.Slash_Commands
             var embedMessage = new DiscordEmbedBuilder()
             {
                 Title = text,
-                ImageUrl = picture.Url
             };
 
             await ctx.Channel.SendMessageAsync(embed: embedMessage);
