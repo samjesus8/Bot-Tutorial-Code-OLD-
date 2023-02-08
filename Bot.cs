@@ -6,6 +6,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
+using DSharpPlus.SlashCommands;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -13,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YouTubeTestBot.Commands;
 using YouTubeTestBot.Config;
+using YouTubeTestBot.Slash_Commands;
 
 namespace YouTubeTestBot
 {
@@ -54,9 +56,14 @@ namespace YouTubeTestBot
             };
 
             Commands = Client.UseCommandsNext(commandsConfig);
+            var slashCommandsConfig = Client.UseSlashCommands();
 
+            //Prefix Based Commands
             Commands.RegisterCommands<FunCommands>();
             Commands.RegisterCommands<GameCommands>();
+
+            //Slash Commands
+            slashCommandsConfig.RegisterCommands<FunSL>(1015010557591572560);
 
             Commands.CommandErrored += OnCommandError;
 
