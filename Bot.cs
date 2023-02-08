@@ -68,13 +68,13 @@ namespace YouTubeTestBot
         {
             if (e.Exception is ChecksFailedException) 
             {
-                var castedException = (ChecksFailedException)e.Exception;
+                var castedException = (ChecksFailedException)e.Exception; //Casting my ErrorEventArgs as a ChecksFailedException
                 string cooldownTimer = string.Empty;
 
                 foreach (var check in castedException.FailedChecks)
                 {
-                    var cooldown = (CooldownAttribute)check;
-                    TimeSpan timeLeft = cooldown.GetRemainingCooldown(e.Context);
+                    var cooldown = (CooldownAttribute)check; //The cooldown that has triggered this method
+                    TimeSpan timeLeft = cooldown.GetRemainingCooldown(e.Context); //Getting the remaining time on this cooldown
                     cooldownTimer = timeLeft.ToString(@"hh\:mm\:ss");
                 }
 

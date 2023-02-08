@@ -19,7 +19,7 @@ namespace YouTubeTestBot.Commands
         [Command("embedmessage1")]
         public async Task SendEmbedMessage2(CommandContext ctx) //Example 1
         {
-            var embedMessage = new DiscordMessageBuilder()
+            var fieldEmbed = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
                 .AddField("Field1", "This is a field", true)
                 .AddField("Field2", "This is a field", true)
@@ -28,7 +28,16 @@ namespace YouTubeTestBot.Commands
                 .WithColor(DiscordColor.Azure)
                 );
 
-            await ctx.RespondAsync(embedMessage);
+            var embedMessage = new DiscordMessageBuilder()
+                .AddEmbed(new DiscordEmbedBuilder()
+
+                .WithColor(DiscordColor.Azure)
+                .WithTitle("This is a title")
+                .WithDescription("This is a description")
+                );
+
+            await ctx.Channel.SendMessageAsync(fieldEmbed);
+            await ctx.Channel.SendMessageAsync(embedMessage);
         }
 
         [Command("embedmessage2")]
@@ -42,6 +51,45 @@ namespace YouTubeTestBot.Commands
             };
 
             await ctx.Channel.SendMessageAsync(embed: embedMessage);
+        }
+
+        [Command("restrictions")]
+
+        //For any Restrictions here, make sure to register an event in your CommandErrored Method to handle this
+
+        //Restricting a Command by Roles
+        [RequireRoles(RoleCheckMode.MatchNames, "Enter Your Roles Here")]
+
+        //Restricting a Command to specific permissions
+        [RequireBotPermissions(DSharpPlus.Permissions.Administrator, true)]
+
+        //Restricting a Command to Owner
+        [RequireOwner]
+        public async Task CommandRestrictionExamples(CommandContext ctx) 
+        {
+            //Restricting a Command by Server
+            if (ctx.Guild.Id == 1015010557591572560) 
+            {
+                //Your Server ID can be found by right-clicking on your Server Icon and clicking "Copy ID"
+            }
+
+            //Restricting a Command by Channel
+            if (ctx.Channel.Id == 1017524740610592808) 
+            {
+                //Right click on the channel you want this command ONLY to execute and click "Copy ID"
+            }
+
+            //Restricting a Command to NSFW Channels
+            if (ctx.Channel.IsNSFW == true) 
+            {
+                //You are checking if this is being executed in an NSFW channel, so your ELSE block must send an error message elsewhere
+            }
+
+            //Restricting a Command to a specific user
+            if (ctx.User.Id == 01234 || ctx.User.Username == "Enter Your Username Here") 
+            {
+                //You can check for the user by their ID or their Username
+            }
         }
 
         [Command("poll")]
