@@ -3,7 +3,6 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.Entities;
-using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
@@ -47,6 +46,8 @@ namespace YouTubeTestBot
                 Timeout = TimeSpan.FromMinutes(2)
             });
 
+            Client.ComponentInteractionCreated += RespondButtonPress;
+
             var commandsConfig = new CommandsNextConfiguration()
             {
                 StringPrefixes = new string[] { configJson.Prefix },
@@ -69,6 +70,11 @@ namespace YouTubeTestBot
 
             await Client.ConnectAsync();
             await Task.Delay(-1);
+        }
+
+        private Task RespondButtonPress(DiscordClient sender, DSharpPlus.EventArgs.ComponentInteractionCreateEventArgs e)
+        {
+            return Task.CompletedTask;
         }
 
         private async Task OnCommandError(CommandsNextExtension sender, CommandErrorEventArgs e)
@@ -94,11 +100,6 @@ namespace YouTubeTestBot
 
                 await e.Context.Channel.SendMessageAsync(embed: cooldownMessage);
             }
-        }
-
-        private Task OnClientReady(ReadyEventArgs e) 
-        {
-            return Task.CompletedTask;
         }
     }
 }
