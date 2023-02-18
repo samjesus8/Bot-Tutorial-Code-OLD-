@@ -46,8 +46,6 @@ namespace YouTubeTestBot
                 Timeout = TimeSpan.FromMinutes(2)
             });
 
-            Client.ComponentInteractionCreated += RespondButtonPress;
-
             var commandsConfig = new CommandsNextConfiguration()
             {
                 StringPrefixes = new string[] { configJson.Prefix },
@@ -70,11 +68,6 @@ namespace YouTubeTestBot
 
             await Client.ConnectAsync();
             await Task.Delay(-1);
-        }
-
-        private Task RespondButtonPress(DiscordClient sender, DSharpPlus.EventArgs.ComponentInteractionCreateEventArgs e)
-        {
-            return Task.CompletedTask;
         }
 
         private async Task OnCommandError(CommandsNextExtension sender, CommandErrorEventArgs e)

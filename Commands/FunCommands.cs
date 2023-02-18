@@ -1,5 +1,4 @@
-﻿using DSharpPlus;
-using DSharpPlus.CommandsNext;
+﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
@@ -14,30 +13,7 @@ namespace YouTubeTestBot.Commands
         [Cooldown(5, 10, CooldownBucketType.User)]
         public async Task TestCommand(CommandContext ctx)
         {
-            var message = new DiscordMessageBuilder()
-                .AddEmbed(new DiscordEmbedBuilder()
-
-                .WithColor(DiscordColor.Azure)
-                .WithTitle("Buttons")
-                .WithDescription("Select a Button")
-                )
-                .AddComponents(new DiscordButtonComponent(ButtonStyle.Primary, "1", "Option1", false))
-                .AddComponents(new DiscordButtonComponent(ButtonStyle.Primary, "2", "Option2", false)
-                );
-
-            var sentMessage = await ctx.Channel.SendMessageAsync(message);
-
-            ctx.Client.ComponentInteractionCreated += async (a, b) =>
-            {
-                if (b.Interaction.Data.CustomId == "1")
-                {
-                    await b.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("1"));
-                }
-                else if (b.Interaction.Data.CustomId == "2")
-                {
-                    await b.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("2"));
-                }
-            };
+            await ctx.Channel.SendMessageAsync("@𝕤𝕒𝕞.𝕛𝕖𝕤𝕦𝕤𝟠#6825");
         }
 
         [Command("embedmessage1")]
