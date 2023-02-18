@@ -3,7 +3,6 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.Entities;
-using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
@@ -94,11 +93,6 @@ namespace YouTubeTestBot
 
                 await e.Context.Channel.SendMessageAsync(embed: cooldownMessage);
             }
-        }
-
-        private Task OnClientReady(ReadyEventArgs e) 
-        {
-            return Task.CompletedTask;
         }
     }
 }
