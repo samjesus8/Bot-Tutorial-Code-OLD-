@@ -46,6 +46,9 @@ namespace YouTubeTestBot
                 Timeout = TimeSpan.FromMinutes(2)
             });
 
+            Client.Ready += OnClientReady;
+            Client.ComponentInteractionCreated += ButtonPressResponse;
+
             var commandsConfig = new CommandsNextConfiguration()
             {
                 StringPrefixes = new string[] { configJson.Prefix },
@@ -68,6 +71,44 @@ namespace YouTubeTestBot
 
             await Client.ConnectAsync();
             await Task.Delay(-1);
+        }
+
+        private async Task ButtonPressResponse(DiscordClient sender, DSharpPlus.EventArgs.ComponentInteractionCreateEventArgs e)
+        {
+            if (e.Interaction.Data.CustomId == "1") 
+            {
+                await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("You pressed the 1st Button"));
+            }
+            else if (e.Interaction.Data.CustomId == "2") 
+            {
+                await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You pressed the 2nd Button"));
+            }
+
+            else if (e.Interaction.Data.CustomId == "funButton") 
+            {
+                string funCommandsList = "!message -> Send a message \n" +
+                                         "!embedmessage1 -> Sends an embed message \n" +
+                                         "!poll -> Starts a poll";
+
+                await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(funCommandsList));
+            }
+            else if (e.Interaction.Data.CustomId == "gameButton") 
+            {
+                string gamesList = "!cardgame -> Play a simple card game. Whoever draws the highest wins the game";
+
+                var gamesCommandList = new DiscordInteractionResponseBuilder()
+                {
+                    Title = "Game Command List",
+                    Content = gamesList,
+                };
+
+                await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, gamesCommandList);
+            }
+        }
+
+        private Task OnClientReady(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs e)
+        {
+            return Task.CompletedTask;
         }
 
         private async Task OnCommandError(CommandsNextExtension sender, CommandErrorEventArgs e)

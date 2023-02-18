@@ -1,4 +1,5 @@
-﻿using DSharpPlus.CommandsNext;
+﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
@@ -181,6 +182,43 @@ namespace YouTubeTestBot.Commands
 
                 await ctx.Channel.SendMessageAsync(embed: errorMsg);
             }
+        }
+
+        [Command("button")]
+        public async Task ButtonExample(CommandContext ctx) 
+        {
+            DiscordButtonComponent button1 = new DiscordButtonComponent(ButtonStyle.Primary, "1", "Button 1");
+            DiscordButtonComponent button2 = new DiscordButtonComponent(ButtonStyle.Primary, "2", "Button 2");
+
+            var message = new DiscordMessageBuilder()
+                .AddEmbed(new DiscordEmbedBuilder()
+
+                .WithColor(DiscordColor.Azure)
+                .WithTitle("This is a message with buttons")
+                .WithDescription("Please select a button")
+                )
+                .AddComponents(button1)
+                .AddComponents(button2);
+
+            await ctx.Channel.SendMessageAsync(message);
+        }
+
+        [Command("help")]
+        public async Task HelpCommand(CommandContext ctx) 
+        {
+            var funButton = new DiscordButtonComponent(ButtonStyle.Success, "funButton", "Fun");
+            var gameButton = new DiscordButtonComponent(ButtonStyle.Success, "gameButton", "Games");
+
+            var helpMessage = new DiscordMessageBuilder()
+                .AddEmbed(new DiscordEmbedBuilder()
+
+                .WithColor(DiscordColor.Azure)
+                .WithTitle("Help Menu")
+                .WithDescription("Please pick a button for more information on the commands")
+                )
+                .AddComponents(funButton, gameButton);
+
+            await ctx.Channel.SendMessageAsync(helpMessage);
         }
     }
 }
