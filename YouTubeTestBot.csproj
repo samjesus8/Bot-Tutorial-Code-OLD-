@@ -163,10 +163,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Config\config.json" />
+    <None Include="docs\index.md" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="docs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
