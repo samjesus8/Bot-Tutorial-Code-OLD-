@@ -163,8 +163,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Config\config.json" />
+    <None Include="docs\Discord_Bot_Setup.md" />
     <None Include="docs\index.md" />
     <None Include="packages.config" />
+    <None Include="_config.yml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
