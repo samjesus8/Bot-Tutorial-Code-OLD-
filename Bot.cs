@@ -66,6 +66,7 @@ namespace YouTubeTestBot
 
             //Slash Commands
             slashCommandsConfig.RegisterCommands<FunSL>(1015010557591572560);
+            slashCommandsConfig.RegisterCommands<ModerationSL>(1015010557591572560);
 
             Commands.CommandErrored += OnCommandError;
 
