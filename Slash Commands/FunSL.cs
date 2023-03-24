@@ -2,7 +2,10 @@
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
+using Google.Apis.Customsearch.v1;
+using Google.Apis.Services;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace YouTubeTestBot.Slash_Commands
@@ -125,6 +128,56 @@ namespace YouTubeTestBot.Slash_Commands
                 );
 
             await ctx.Channel.SendMessageAsync(captionMessage);
+        }
+
+        //User Requested Commands
+
+        [SlashCommand("create-VC", "Creates a voice channel")]
+        public async Task CreateVC(InteractionContext ctx, [Option("channel-name", "Name of this Voice Channel")] string channelName,
+                                                           [Option("member-limit", "Adds a user limit to this channel")] string channelLimit = null)
+        {
+            await ctx.DeferAsync();
+
+            var channelUsersParse = int.TryParse(channelLimit, out int channelUsers);
+
+            //Create the Voice Channel with the channel limit
+            if (channelLimit != null && channelUsersParse == true)
+            {
+                await ctx.Guild.CreateVoiceChannelAsync(channelName, null, null, channelUsers);
+
+                var success = new DiscordEmbedBuilder()
+                {
+                    Title = "Created Voice Channel " + channelName,
+                    Description = "The channel was created with a user limit of " + channelLimit.ToString(),
+                    Color = DiscordColor.Azure
+                };
+
+                await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(success));
+            }
+            //No User Limit
+            else if (channelLimit == null)
+            {
+                var channel = await ctx.Guild.CreateVoiceChannelAsync(channelName);
+
+                var success = new DiscordEmbedBuilder()
+                {
+                    Title = "Created Voice Channel " + channelName,
+                    Color = DiscordColor.Azure
+                };
+
+                await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(success));
+            }
+            //Invalid input parsed in
+            else if (channelUsersParse == false)
+            {
+                var fail = new DiscordEmbedBuilder()
+                {
+                    Title = "Please provide a valid number for the user limit",
+                    Color = DiscordColor.Red
+                };
+
+                await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(fail));
+            }
         }
     }
 }

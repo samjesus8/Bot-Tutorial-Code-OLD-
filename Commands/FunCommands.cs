@@ -3,7 +3,10 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
+using Google.Apis.Customsearch.v1;
+using Google.Apis.Services;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace YouTubeTestBot.Commands
@@ -220,5 +223,39 @@ namespace YouTubeTestBot.Commands
 
             await ctx.Channel.SendMessageAsync(helpMessage);
         }
+
+        [Command("image")]
+        [Description("Searches Google Images for the given query.")]
+        public async Task ImageSearch(CommandContext ctx, [RemainingText] string query)
+        {
+            // Replace with your own Custom Search Engine ID and API Key
+            string cseId = "07c531be527304e3f";
+            string apiKey = "AIzaSyCiJHpqd9SQtAzvwCUUJUFyZF_oT7uJNHM";
+
+            var customSearchService = new CustomsearchService(new BaseClientService.Initializer
+            {
+                ApplicationName = "Discord Bot",
+                ApiKey = apiKey,
+            });
+
+            var listRequest = customSearchService.Cse.List();
+            listRequest.Cx = cseId;
+            listRequest.SearchType = CseResource.ListRequest.SearchTypeEnum.Image;
+            listRequest.Q = query;
+
+            var search = await listRequest.ExecuteAsync();
+            var results = search.Items;
+
+            if (results == null || !results.Any())
+            {
+                await ctx.RespondAsync("No results found.");
+                return;
+            }
+
+            // Get the first result from the search and send it as a message
+            var firstResult = results.First();
+            await ctx.RespondAsync(firstResult.Link);
+        }
+
     }
 }
