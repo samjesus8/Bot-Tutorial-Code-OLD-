@@ -157,7 +157,7 @@ namespace YouTubeTestBot.Slash_Commands
             //No User Limit
             else if (channelLimit == null)
             {
-                var channel = await ctx.Guild.CreateVoiceChannelAsync(channelName);
+                await ctx.Guild.CreateVoiceChannelAsync(channelName);
 
                 var success = new DiscordEmbedBuilder()
                 {

@@ -229,8 +229,8 @@ namespace YouTubeTestBot.Commands
         public async Task ImageSearch(CommandContext ctx, [RemainingText] string query)
         {
             // Replace with your own Custom Search Engine ID and API Key
-            string cseId = "07c531be527304e3f";
-            string apiKey = "AIzaSyCiJHpqd9SQtAzvwCUUJUFyZF_oT7uJNHM";
+            string cseId = "Custom-Search-Engine-ID";
+            string apiKey = "API-KEY";
 
             var customSearchService = new CustomsearchService(new BaseClientService.Initializer
             {
