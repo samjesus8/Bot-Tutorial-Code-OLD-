@@ -2,10 +2,7 @@
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
-using Google.Apis.Customsearch.v1;
-using Google.Apis.Services;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace YouTubeTestBot.Slash_Commands

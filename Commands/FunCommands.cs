@@ -5,6 +5,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using Google.Apis.Customsearch.v1;
 using Google.Apis.Services;
+using OpenAI_API;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -255,6 +256,33 @@ namespace YouTubeTestBot.Commands
             // Get the first result from the search and send it as a message
             var firstResult = results.First();
             await ctx.RespondAsync(firstResult.Link);
+        }
+
+        [Command("gpt")]
+        public async Task ChatGPT(CommandContext ctx, params string[] message)
+        {
+            //Initialise the API
+            var api = new OpenAIAPI("API-KEY-HERE");
+
+            //Initialise a new Chat
+            var chat = api.Chat.CreateConversation();
+            chat.AppendSystemMessage("Type in a query");
+
+            //Pass in the query to GPT
+            chat.AppendUserInput(string.Join(" ", message));
+
+            //Get the response
+            string response = await chat.GetResponseFromChatbot();
+
+            //Show in Discord Embed Message
+            var responseMsg = new DiscordEmbedBuilder()
+            {
+                Title = string.Join(" ", message),
+                Description = response,
+                Color = DiscordColor.Green
+            };
+
+            await ctx.Channel.SendMessageAsync(embed: responseMsg);
         }
 
     }
