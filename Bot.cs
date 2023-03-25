@@ -67,8 +67,9 @@ namespace YouTubeTestBot
             var slashCommandsConfig = Client.UseSlashCommands();
 
             //Prefix Based Commands
-            Commands.RegisterCommands<FunCommands>();
+            Commands.RegisterCommands<BasicCommands>();
             Commands.RegisterCommands<GameCommands>();
+            Commands.RegisterCommands<UserRequestedCommands>();
 
             //Slash Commands
             slashCommandsConfig.RegisterCommands<FunSL>();
