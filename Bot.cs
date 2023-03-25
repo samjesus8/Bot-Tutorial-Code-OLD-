@@ -11,9 +11,11 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using YouTubeTestBot.Commands;
 using YouTubeTestBot.Config;
 using YouTubeTestBot.Slash_Commands;
+using YouTubeTestBot.YouTube;
 
 namespace YouTubeTestBot
 {
@@ -22,6 +24,10 @@ namespace YouTubeTestBot
         public DiscordClient Client { get; private set; }
         public InteractivityExtension Interactivity { get; private set; }
         public CommandsNextExtension Commands { get; private set; }
+
+        private YouTubeVideo _video = new YouTubeVideo();
+        private YouTubeVideo temp = new YouTubeVideo();
+        private Engine _YouTubeEngine = new Engine();
 
         public async Task RunAsync() 
         {
@@ -71,6 +77,9 @@ namespace YouTubeTestBot
             Commands.CommandErrored += OnCommandError;
 
             await Client.ConnectAsync();
+
+            ulong channelIdToNotify = 1088762895573209178; // your Discord channel ID
+            await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
             await Task.Delay(-1);
         }
 
@@ -135,6 +144,37 @@ namespace YouTubeTestBot
 
                 await e.Context.Channel.SendMessageAsync(embed: cooldownMessage);
             }
+        }
+
+        public async Task StartVideoUploadNotifier(string channelId, string apiKey, DiscordClient client, ulong channelIdToNotify)
+        {
+            var timer = new Timer(120000); //Timer set for 2 min
+            timer.Elapsed += async (sender, e) => {
+                _video = _YouTubeEngine.GetLatestVideo(channelId, apiKey); //Get latest video using API
+                DateTime lastCheckedAt = DateTime.Now;
+
+                if (_video != null)
+                {
+                    if (temp.videoTitle == _video.videoTitle) //This ensures that only the newest videos get sent through
+                    {
+                        Console.WriteLine("Same name");
+                    }
+                    else if (_video.PublishedAt < lastCheckedAt) //If the new video is actually new
+                    {
+                        var message = $"NEW VIDEO | **{_video.videoTitle}** \n" +
+                                      $"Published at: {_video.PublishedAt} \n" +
+                                      "URL: " + _video.videoUrl;
+
+                        await client.GetChannelAsync(channelIdToNotify).Result.SendMessageAsync(message);
+                        temp = _video;
+                    }
+                    else
+                    {
+                        Console.WriteLine("No new videos were found");
+                    }
+                }
+            };
+            timer.Start();
         }
     }
 }
