@@ -38,10 +38,18 @@ namespace YouTubeTestBot.Commands
                 await ctx.RespondAsync("No results found.");
                 return;
             }
-
-            // Get the first result from the search and send it as a message
-            var firstResult = results.First();
-            await ctx.RespondAsync(firstResult.Link);
+            else
+            {
+                // Get the first result from the search and send it as a message
+                var firstResult = results.First();
+                var imageEmbed = new DiscordEmbedBuilder()
+                {
+                    Title = "Result for: " + query,
+                    Color = DiscordColor.Azure,
+                    ImageUrl = firstResult.Link
+                };
+                await ctx.Channel.SendMessageAsync(embed: imageEmbed);
+            }
         }
 
         [Command("gpt")]
