@@ -21,8 +21,8 @@ namespace YouTubeTestBot.Commands
 
             // Replace with your own Custom Search Engine ID and API Key
 
-            string cseId = "e14e788ce60ac4667";
-            string apiKey = "AIzaSyCo6GQru37bLMaPRLv8gcj_v0yeY2S0wAo";
+            string cseId = "CSE-ID-HERE";
+            string apiKey = "API-KEY-HERE";
 
             //Initialise the API
 
