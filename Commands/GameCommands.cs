@@ -4,7 +4,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using System;
 using System.Threading.Tasks;
-using YouTubeTestBot.External_Classes;
+using YouTubeTestBot.Engine.External_Classes;
 
 namespace YouTubeTestBot.Commands
 {

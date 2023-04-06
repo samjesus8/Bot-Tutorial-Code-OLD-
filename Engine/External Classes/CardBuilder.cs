@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YouTubeTestBot.External_Classes
+namespace YouTubeTestBot.Engine.External_Classes
 {
     internal class CardBuilder
     {

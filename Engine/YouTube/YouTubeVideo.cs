@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YouTubeTestBot.YouTube
+namespace YouTubeTestBot.Engine.YouTube
 {
     public class YouTubeVideo
     {

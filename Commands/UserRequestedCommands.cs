@@ -1,4 +1,5 @@
-﻿using DSharpPlus.CommandsNext;
+﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using Google.Apis.Customsearch.v1;
@@ -15,9 +16,15 @@ namespace YouTubeTestBot.Commands
         [Description("Searches Google Images for the given query.")]
         public async Task ImageSearch(CommandContext ctx, [RemainingText] string query)
         {
+            Program.imageHandler.images.Clear();
+            int IDCount = 0;
+
             // Replace with your own Custom Search Engine ID and API Key
-            string cseId = "Custom-Search-Engine-ID";
-            string apiKey = "API-KEY";
+
+            string cseId = "e14e788ce60ac4667";
+            string apiKey = "AIzaSyCo6GQru37bLMaPRLv8gcj_v0yeY2S0wAo";
+
+            //Initialise the API
 
             var customSearchService = new CustomsearchService(new BaseClientService.Initializer
             {
@@ -25,13 +32,24 @@ namespace YouTubeTestBot.Commands
                 ApiKey = apiKey,
             });
 
+            //Create your search request
+
             var listRequest = customSearchService.Cse.List();
             listRequest.Cx = cseId;
+            listRequest.Num = 10;
             listRequest.SearchType = CseResource.ListRequest.SearchTypeEnum.Image;
             listRequest.Q = query;
 
+            //Execute the search request & get the results
+
             var search = await listRequest.ExecuteAsync();
             var results = search.Items;
+
+            foreach (var result in results)
+            {
+                Program.imageHandler.images.Add(IDCount, result.Link);
+                IDCount++;
+            }
 
             if (results == null || !results.Any())
             {
@@ -40,15 +58,24 @@ namespace YouTubeTestBot.Commands
             }
             else
             {
-                // Get the first result from the search and send it as a message
+                //Create the buttons for this embed
+                var previousEmoji = new DiscordComponentEmoji(DiscordEmoji.FromName(ctx.Client, ":track_previous:"));
+                var previousButton = new DiscordButtonComponent(ButtonStyle.Primary, "previousButton", "Previous", false, previousEmoji);
+
+                var nextEmoji = new DiscordComponentEmoji(DiscordEmoji.FromName(ctx.Client, ":track_next:"));
+                var nextButton = new DiscordButtonComponent(ButtonStyle.Primary, "nextButton", "Next", false, nextEmoji);
+
+                //Display the First Result
                 var firstResult = results.First();
-                var imageEmbed = new DiscordEmbedBuilder()
-                {
-                    Title = "Result for: " + query,
-                    Color = DiscordColor.Azure,
-                    ImageUrl = firstResult.Link
-                };
-                await ctx.Channel.SendMessageAsync(embed: imageEmbed);
+                var imageMessage = new DiscordMessageBuilder()
+                    .AddEmbed(new DiscordEmbedBuilder()
+                    .WithColor(DiscordColor.Azure)
+                    .WithTitle("Results for: " + query)
+                    .WithImageUrl(firstResult.Link)
+                    )
+                    .AddComponents(previousButton, nextButton);
+
+                await ctx.Channel.SendMessageAsync(imageMessage);
             }
         }
 

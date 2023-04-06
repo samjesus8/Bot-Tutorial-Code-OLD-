@@ -2,9 +2,9 @@
 using Google.Apis.YouTube.v3;
 using System;
 
-namespace YouTubeTestBot.YouTube
+namespace YouTubeTestBot.Engine.YouTube
 {
-    public class Engine
+    public class YouTubeEngine
     {
         public string channelId = "Channel-ID-Here";
         public string apiKey = "API-Key-Here";
