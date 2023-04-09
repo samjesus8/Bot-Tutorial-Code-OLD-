@@ -183,6 +183,8 @@
     <Compile Include="Config\ConfigJSONReader.cs" />
     <Compile Include="Engine\External Classes\CardBuilder.cs" />
     <Compile Include="Engine\ImageHandler\GoogleImageHandler.cs" />
+    <Compile Include="Engine\LevelSystem\DUser.cs" />
+    <Compile Include="Engine\LevelSystem\LevelEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Slash Commands\FunSL.cs" />
@@ -195,6 +197,7 @@
     <None Include="Config\config.json" />
     <None Include="docs\Discord_Bot_Setup.md" />
     <None Include="docs\index.md" />
+    <None Include="Engine\LevelSystem\UserInfo.json" />
     <None Include="packages.config" />
     <None Include="_config.yml" />
   </ItemGroup>

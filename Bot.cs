@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using YouTubeTestBot.Commands;
 using YouTubeTestBot.Config;
+using YouTubeTestBot.Engine.LevelSystem;
 using YouTubeTestBot.Engine.YouTube;
 using YouTubeTestBot.Slash_Commands;
 
@@ -87,13 +88,26 @@ namespace YouTubeTestBot
             await Task.Delay(-1);
         }
 
-        private Task MessageSendHandler(DiscordClient sender, DSharpPlus.EventArgs.MessageCreateEventArgs e)
+        private async Task MessageSendHandler(DiscordClient sender, DSharpPlus.EventArgs.MessageCreateEventArgs e)
         {
             if (e.Message.Content == "!image")
             {
                 ImageIDCounter = 0; //Reset the counter when someone uses this command
             }
-            return Task.CompletedTask;
+
+            var levelEngine = new LevelEngine();
+            var addedXP = levelEngine.AddXP(e.Author.Username, e.Guild.Id);
+            if (levelEngine.levelledUp == true)
+            {
+                var levelledUpEmbed = new DiscordEmbedBuilder()
+                {
+                    Title = e.Author.Username + " has levelled up!!!!",
+                    Description = "Level: " + levelEngine.GetUser(e.Author.Username, e.Guild.Id).Level.ToString(),
+                    Color = DiscordColor.Chartreuse
+                };
+
+                await e.Channel.SendMessageAsync(e.Author.Mention, embed: levelledUpEmbed);
+            }
         }
 
         private async Task ButtonPressResponse(DiscordClient sender, DSharpPlus.EventArgs.ComponentInteractionCreateEventArgs e)

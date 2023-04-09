@@ -1,7 +1,6 @@
 # C# Discord Bot | Made by Sam J
 
-![image](https://user-images.githubusercontent.com/98812930/212711257-b1303cae-7f3b-4a36-aa43-a4b162967a56.png)
-![image](https://user-images.githubusercontent.com/98812930/212710906-d1658e14-02e9-424c-ab48-89b66b7d2eda.png)
+![image](https://media.discordapp.net/attachments/1020110665161113610/1084826383907291167/READMETHUMB.jpg?width=1048&height=287)
 
 ## About
 
@@ -29,6 +28,15 @@ If you would like to clone this repository and use the commands in the Tutorial 
 4. Copy and paste your Bot's Token to the 'config.json' file
 5. Build the application and then copy over the 'config.json' file to the '/bin/Debug' folder. This step is vital if the packages used in this solution are not imported/restored
 6. You can then start it up and the Bot should work in the same way as it is shown in the tutorial videos
+
+## Template Repository
+
+If you would like to create your own Bot and you are struggling with the Part 1 Video, then you can clone this template repository which
+contains everything you need to get started
+
+This repository contains everything you need to get started, you just need to follow the instructions to get it prepped up and ready for use
+
+[C# Discord Bot Template Code](https://github.com/samjesus8/CSharp-Discord-Bot-Template)
 
 ## Help & Support
 
