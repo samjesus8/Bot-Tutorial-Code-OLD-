@@ -18,9 +18,9 @@ namespace YouTubeTestBot.Commands
             var userCardMessage = new DiscordMessageBuilder() //Displaying the User's card in an embed
                 .AddEmbed(new DiscordEmbedBuilder()
 
-                .WithColor(DiscordColor.Azure)
-                .WithTitle("Your Card")
-                .WithDescription("You drew a: " + UserCard.SelectedCard)
+                    .WithColor(DiscordColor.Azure)
+                    .WithTitle("Your Card")
+                    .WithDescription("You drew a: " + UserCard.SelectedCard)
                 );
 
             await ctx.Channel.SendMessageAsync(userCardMessage);
@@ -30,9 +30,9 @@ namespace YouTubeTestBot.Commands
             var botCardMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
                 
-                .WithColor(DiscordColor.Azure)
-                .WithTitle("Bot Card")
-                .WithDescription("The Bot drew a: " + BotCard.SelectedCard)
+                    .WithColor(DiscordColor.Azure)
+                    .WithTitle("Bot Card")
+                    .WithDescription("The Bot drew a: " + BotCard.SelectedCard)
                 );
 
             await ctx.Channel.SendMessageAsync(botCardMessage);
@@ -82,9 +82,9 @@ namespace YouTubeTestBot.Commands
             var pollMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
 
-                .WithColor(DiscordColor.Azure)
-                .WithTitle(string.Join(" ", Question))
-                .WithDescription(optionsString)
+                    .WithColor(DiscordColor.Azure)
+                    .WithTitle(string.Join(" ", Question))
+                    .WithDescription(optionsString)
                 ); //Making the Poll message
 
             var putReactOn = await ctx.Channel.SendMessageAsync(pollMessage); //Storing the await command in a variable
@@ -124,17 +124,17 @@ namespace YouTubeTestBot.Commands
             int totalVotes = count1 + count2 + count3 + count4;
 
             string resultsString = optionEmojis[0] + ": " + count1 + " Votes \n" +
-                       optionEmojis[1] + ": " + count2 + " Votes \n" +
-                       optionEmojis[2] + ": " + count3 + " Votes \n" +
-                       optionEmojis[3] + ": " + count4 + " Votes \n\n" +
-                       "The total number of votes is " + totalVotes; //String to show the results of the poll
+                                   optionEmojis[1] + ": " + count2 + " Votes \n" +
+                                   optionEmojis[2] + ": " + count3 + " Votes \n" +
+                                   optionEmojis[3] + ": " + count4 + " Votes \n\n" +
+                                   "The total number of votes is " + totalVotes; //String to show the results of the poll
 
             var resultsMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
 
-                .WithColor(DiscordColor.Green)
-                .WithTitle("Results of Poll")
-                .WithDescription(resultsString)
+                    .WithColor(DiscordColor.Green)
+                    .WithTitle("Results of Poll")
+                    .WithDescription(resultsString)
                 );
 
             await ctx.Channel.SendMessageAsync(resultsMessage); //Making the embed and sending it off  

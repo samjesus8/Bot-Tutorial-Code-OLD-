@@ -6,10 +6,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
-using Newtonsoft.Json;
 using System;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using YouTubeTestBot.Commands;
@@ -34,17 +31,13 @@ namespace YouTubeTestBot
 
         public async Task RunAsync() 
         {
-            var json = string.Empty;
-            using (var fs = File.OpenRead("config.json"))
-            using (var sr = new StreamReader(fs, new UTF8Encoding(false)))
-                json = await sr.ReadToEndAsync();
-
-            var configJson = JsonConvert.DeserializeObject<ConfigJSON>(json);
+            var configJson = new ConfigJSONReader();
+            await configJson.ReadJSON();
 
             var config = new DiscordConfiguration()
             {
                 Intents = DiscordIntents.All,
-                Token = configJson.Token,
+                Token = configJson.token,
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
             };
@@ -61,7 +54,7 @@ namespace YouTubeTestBot
 
             var commandsConfig = new CommandsNextConfiguration()
             {
-                StringPrefixes = new string[] { configJson.Prefix },
+                StringPrefixes = new string[] { configJson.prefix },
                 EnableMentionPrefix = true,
                 EnableDms = true,
                 EnableDefaultHelp = false,

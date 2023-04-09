@@ -21,19 +21,18 @@ namespace YouTubeTestBot.Commands
         {
             var fieldEmbed = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-                .AddField("Field1", "This is a field", true)
-                .AddField("Field2", "This is a field", true)
-                .AddField("Field3", "This is a field", true)
-                .AddField("Field4", "This is a field", true)
-                .WithColor(DiscordColor.Azure)
+                    .AddField("Field1", "This is a field", true)
+                    .AddField("Field2", "This is a field", true)
+                    .AddField("Field3", "This is a field", true)
+                    .AddField("Field4", "This is a field", true)
+                    .WithColor(DiscordColor.Azure)
                 );
 
             var embedMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-
-                .WithColor(DiscordColor.Azure)
-                .WithTitle("This is a title")
-                .WithDescription("This is a description")
+                    .WithColor(DiscordColor.Azure)
+                    .WithTitle("This is a title")
+                    .WithDescription("This is a description")
                 );
 
             await ctx.Channel.SendMessageAsync(fieldEmbed);
@@ -165,11 +164,11 @@ namespace YouTubeTestBot.Commands
 
                     var profile = new DiscordMessageBuilder()
                         .AddEmbed(new DiscordEmbedBuilder()
-                        .WithColor(DiscordColor.Aquamarine)
-                        .WithTitle(pulledUser.UserName + "'s Profile")
-                        .WithThumbnail(pulledUser.avatarURL)
-                        .AddField("Level", pulledUser.Level.ToString(), true)
-                        .AddField("XP", pulledUser.XP.ToString(), true)
+                            .WithColor(DiscordColor.Aquamarine)
+                            .WithTitle(pulledUser.UserName + "'s Profile")
+                            .WithThumbnail(pulledUser.avatarURL)
+                            .AddField("Level", pulledUser.Level.ToString(), true)
+                            .AddField("XP", pulledUser.XP.ToString(), true)
                         );
 
                     await ctx.Channel.SendMessageAsync(profile);
@@ -191,11 +190,11 @@ namespace YouTubeTestBot.Commands
 
                 var profile = new DiscordMessageBuilder()
                     .AddEmbed(new DiscordEmbedBuilder()
-                    .WithColor(DiscordColor.Aquamarine)
-                    .WithTitle(pulledUser.UserName + "'s Profile")
-                    .WithThumbnail(pulledUser.avatarURL)
-                    .AddField("Level", pulledUser.Level.ToString(), true)
-                    .AddField("XP", pulledUser.XP.ToString(), true)
+                        .WithColor(DiscordColor.Aquamarine)
+                        .WithTitle(pulledUser.UserName + "'s Profile")
+                        .WithThumbnail(pulledUser.avatarURL)
+                        .AddField("Level", pulledUser.Level.ToString(), true)
+                        .AddField("XP", pulledUser.XP.ToString(), true)
                     );
 
                 await ctx.Channel.SendMessageAsync(profile);
