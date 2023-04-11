@@ -113,18 +113,16 @@ namespace YouTubeTestBot.Slash_Commands
         public async Task CaptionCommand(InteractionContext ctx, [Option("caption", "The caption you want the image to have")] string caption,
                                                                  [Option("image", "The image you want to upload")] DiscordAttachment picture) 
         {
-            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
-                                                                    .WithContent("..."));
+            await ctx.DeferAsync();
 
             var captionMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
+                    .WithColor(DiscordColor.Azure)
+                    .WithFooter(caption)
+                    .WithImageUrl(picture.Url)
+                    );
 
-                .WithColor(DiscordColor.Azure)
-                .WithFooter(caption)
-                .WithImageUrl(picture.Url)
-                );
-
-            await ctx.Channel.SendMessageAsync(captionMessage);
+            await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(captionMessage.Embed));
         }
 
         //User Requested Commands

@@ -175,7 +175,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bot.cs" />
     <Compile Include="Commands\BasicCommands.cs" />
     <Compile Include="Commands\GameCommands.cs" />
     <Compile Include="Commands\UserRequestedCommands.cs" />
