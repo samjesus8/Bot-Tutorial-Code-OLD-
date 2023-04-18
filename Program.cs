@@ -3,6 +3,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
@@ -21,9 +22,9 @@ namespace YouTubeTestBot
     public sealed class Program
     {
         //Main Discord Properties
-        public static DiscordClient Client { get; private set; }
-        public static InteractivityExtension Interactivity { get; private set; }
-        public static CommandsNextExtension Commands { get; private set; }
+        private static DiscordClient Client { get; set; }
+        private static InteractivityExtension Interactivity { get; set; }
+        private static CommandsNextExtension Commands { get; set; }
 
         //YouTube Properties
         private static YouTubeVideo _video = new YouTubeVideo();
@@ -88,7 +89,7 @@ namespace YouTubeTestBot
             await Task.Delay(-1);
         }
 
-        private static async Task MessageSendHandler(DiscordClient sender, DSharpPlus.EventArgs.MessageCreateEventArgs e)
+        private static async Task MessageSendHandler(DiscordClient sender, MessageCreateEventArgs e)
         {
             if (e.Message.Content == "!image")
             {
@@ -110,7 +111,7 @@ namespace YouTubeTestBot
             }
         }
 
-        private static async Task ButtonPressResponse(DiscordClient sender, DSharpPlus.EventArgs.ComponentInteractionCreateEventArgs e)
+        private static async Task ButtonPressResponse(DiscordClient sender, ComponentInteractionCreateEventArgs e)
         {
             if (e.Interaction.Data.CustomId == "1")
             {
@@ -189,7 +190,7 @@ namespace YouTubeTestBot
             }
         }
 
-        private static Task OnClientReady(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs e)
+        private static Task OnClientReady(DiscordClient sender, ReadyEventArgs e)
         {
             return Task.CompletedTask;
         }
@@ -243,7 +244,7 @@ namespace YouTubeTestBot
                     }
                     else
                     {
-                        Console.WriteLine("No new videos were found");
+                        Console.WriteLine("[" +lastCheckedAt.ToString()+ "]" + "YouTube API: No new videos were found");
                     }
                 }
             };
