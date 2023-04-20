@@ -8,6 +8,7 @@ using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using YouTubeTestBot.Commands;
@@ -128,6 +129,34 @@ namespace YouTubeTestBot
 
         private static async Task ButtonPressResponse(DiscordClient sender, ComponentInteractionCreateEventArgs e)
         {
+            //Drop-Down Lists
+            if (e.Id == "dropDown1")
+            {
+                var options = e.Values;
+                foreach (var option in options)
+                {
+                    switch (option)
+                    {
+                        case "option1":
+                            await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You selected Option1"));
+                            break;
+
+                        case "option2":
+                            await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You selected Option2"));
+                            break;
+
+                        case "option3":
+                            await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You selected Option3"));
+                            break;
+
+                        default:
+                            Console.WriteLine("Error in Interaction Event Handler");
+                            break;
+                    }
+                }
+            }
+
+            //Buttons
             switch (e.Interaction.Data.CustomId)
             {
                 case "1":
