@@ -84,6 +84,7 @@ namespace YouTubeTestBot
             Commands.RegisterCommands<BasicCommands>();
             Commands.RegisterCommands<GameCommands>();
             Commands.RegisterCommands<UserRequestedCommands>();
+            Commands.RegisterCommands<DiscordComponentExamples>();
 
             //Slash Commands
             slashCommandsConfig.RegisterCommands<FunSL>();
@@ -96,7 +97,10 @@ namespace YouTubeTestBot
             await Client.ConnectAsync();
 
             ulong channelIdToNotify = 123456789; // your Discord channel ID
-            await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
+
+            //Remove comments on below line if you need the YouTube notifier to run
+            //await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
+
             await Task.Delay(-1);
         }
 
@@ -127,7 +131,7 @@ namespace YouTubeTestBot
             switch (e.Interaction.Data.CustomId)
             {
                 case "1":
-                    await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("You pressed the 1st Button"));
+                    await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You pressed the 1st Button"));
                     break;
 
                 case "2":
