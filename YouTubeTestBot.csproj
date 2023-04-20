@@ -178,7 +178,6 @@
     <Compile Include="Commands\BasicCommands.cs" />
     <Compile Include="Commands\GameCommands.cs" />
     <Compile Include="Commands\UserRequestedCommands.cs" />
-    <Compile Include="Config\ConfigJSON.cs" />
     <Compile Include="Config\ConfigJSONReader.cs" />
     <Compile Include="Engine\External Classes\CardBuilder.cs" />
     <Compile Include="Engine\ImageHandler\GoogleImageHandler.cs" />

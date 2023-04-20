@@ -37,37 +37,46 @@ namespace YouTubeTestBot
 
         static async Task Main(string[] args)
         {
+            //Instantiating the class with the Instance property
             imageHandler = GoogleImageHandler.Instance;
 
+            //Reading the Token & Prefix
             var configJson = new ConfigJSONReader();
             await configJson.ReadJSON();
 
+            //Making a Bot Configuration with our token & additional settings
             var config = new DiscordConfiguration()
             {
                 Intents = DiscordIntents.All,
-                Token = configJson.token,
+                Token = configJson.discordToken,
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
             };
 
+            //Initializing the client with this config
             Client = new DiscordClient(config);
+
+            //Setting our default timeout for Interactivity based commands
             Client.UseInteractivity(new InteractivityConfiguration()
             {
                 Timeout = TimeSpan.FromMinutes(2)
             });
 
+            //EVENT HANDLERS
             Client.Ready += OnClientReady;
             Client.ComponentInteractionCreated += ButtonPressResponse;
             Client.MessageCreated += MessageSendHandler;
 
+            //Setting up our Commands Configuration with our Prefix
             var commandsConfig = new CommandsNextConfiguration()
             {
-                StringPrefixes = new string[] { configJson.prefix },
+                StringPrefixes = new string[] { configJson.discordPrefix },
                 EnableMentionPrefix = true,
                 EnableDms = true,
                 EnableDefaultHelp = false,
             };
 
+            //Enabling the use of commands with our config & also enabling use of Slash Commands
             Commands = Client.UseCommandsNext(commandsConfig);
             var slashCommandsConfig = Client.UseSlashCommands();
 
@@ -80,11 +89,13 @@ namespace YouTubeTestBot
             slashCommandsConfig.RegisterCommands<FunSL>();
             slashCommandsConfig.RegisterCommands<ModerationSL>();
 
+            //ERROR EVENT HANDLERS
             Commands.CommandErrored += OnCommandError;
 
+            //Connect to the Client and get the Bot online
             await Client.ConnectAsync();
 
-            ulong channelIdToNotify = 1088762895573209178; // your Discord channel ID
+            ulong channelIdToNotify = 123456789; // your Discord channel ID
             await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
             await Task.Delay(-1);
         }
@@ -113,80 +124,88 @@ namespace YouTubeTestBot
 
         private static async Task ButtonPressResponse(DiscordClient sender, ComponentInteractionCreateEventArgs e)
         {
-            if (e.Interaction.Data.CustomId == "1")
+            switch (e.Interaction.Data.CustomId)
             {
-                await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("You pressed the 1st Button"));
-            }
-            else if (e.Interaction.Data.CustomId == "2")
-            {
-                await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You pressed the 2nd Button"));
-            }
+                case "1":
+                    await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("You pressed the 1st Button"));
+                    break;
 
-            else if (e.Interaction.Data.CustomId == "funButton")
-            {
-                string funCommandsList = "!message -> Send a message \n" +
-                                         "!embedmessage1 -> Sends an embed message \n" +
-                                         "!poll -> Starts a poll";
+                case "2":
+                    await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You pressed the 2nd Button"));
+                    break;
 
-                await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(funCommandsList));
-            }
-            else if (e.Interaction.Data.CustomId == "gameButton")
-            {
-                string gamesList = "!cardgame -> Play a simple card game. Whoever draws the highest wins the game";
+                case "funButton":
+                    string funCommandsList = "!message -> Send a message \n" +
+                         "!embedmessage1 -> Sends an embed message \n" +
+                         "!poll -> Starts a poll";
 
-                var gamesCommandList = new DiscordInteractionResponseBuilder()
-                {
-                    Title = "Game Command List",
-                    Content = gamesList,
-                };
+                    await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(funCommandsList));
 
-                await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, gamesCommandList);
-            }
-            else if (e.Interaction.Data.CustomId == "previousButton")
-            {
-                ImageIDCounter--; //Decrement the ID by 1 to get the ID for the previous image
-                string imageURL = Program.imageHandler.GetImageAtId(ImageIDCounter); //Get the image from the Dictionary
+                    break;
 
-                //Initialise the Buttons again
+                case "gameButton":
+                    string gamesList = "!cardgame -> Play a simple card game. Whoever draws the highest wins the game";
 
-                var previousEmoji = new DiscordComponentEmoji(DiscordEmoji.FromName(Client, ":track_previous:"));
-                var previousButton = new DiscordButtonComponent(ButtonStyle.Primary, "previousButton", "Previous", false, previousEmoji);
+                    var gamesCommandList = new DiscordEmbedBuilder()
+                    {
+                        Title = gamesList,
+                    };
 
-                var nextEmoji = new DiscordComponentEmoji(DiscordEmoji.FromName(Client, ":track_next:"));
-                var nextButton = new DiscordButtonComponent(ButtonStyle.Primary, "nextButton", "Next", false, nextEmoji);
+                    await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().AddEmbed(gamesCommandList));
 
-                //Send the new image as a response to the button press, replacing the previous image
+                    break;
 
-                var imageMessage = new DiscordMessageBuilder()
-                    .AddEmbed(new DiscordEmbedBuilder()
-                    .WithColor(DiscordColor.Azure)
-                    .WithTitle("Results")
-                    .WithImageUrl(imageURL)
-                    .WithFooter("Page " + ImageIDCounter)
-                    )
-                    .AddComponents(previousButton, nextButton);
-                await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().AddEmbed(imageMessage.Embed).AddComponents(imageMessage.Components));
-            }
-            else if (e.Interaction.Data.CustomId == "nextButton")
-            {
-                ImageIDCounter++; //Same idea but this time you increment the counter by 1 to get the next image
-                string imageURL = Program.imageHandler.GetImageAtId(ImageIDCounter);
+                case "previousButton":
+                    ImageIDCounter--; //Decrement the ID by 1 to get the ID for the previous image
+                    string imageURL = Program.imageHandler.GetImageAtId(ImageIDCounter); //Get the image from the Dictionary
 
-                var previousEmoji = new DiscordComponentEmoji(DiscordEmoji.FromName(Client, ":track_previous:"));
-                var previousButton = new DiscordButtonComponent(ButtonStyle.Primary, "previousButton", "Previous", false, previousEmoji);
+                    //Initialise the Buttons again
 
-                var nextEmoji = new DiscordComponentEmoji(DiscordEmoji.FromName(Client, ":track_next:"));
-                var nextButton = new DiscordButtonComponent(ButtonStyle.Primary, "nextButton", "Next", false, nextEmoji);
+                    var previousEmoji = new DiscordComponentEmoji(DiscordEmoji.FromName(Client, ":track_previous:"));
+                    var previousButton = new DiscordButtonComponent(ButtonStyle.Primary, "previousButton", "Previous", false, previousEmoji);
 
-                var imageMessage = new DiscordMessageBuilder()
-                    .AddEmbed(new DiscordEmbedBuilder()
-                    .WithColor(DiscordColor.Azure)
-                    .WithTitle("Results")
-                    .WithImageUrl(imageURL)
-                    .WithFooter("Page " + ImageIDCounter)
-                    )
-                    .AddComponents(previousButton, nextButton);
-                await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().AddEmbed(imageMessage.Embed).AddComponents(imageMessage.Components));
+                    var nextEmoji = new DiscordComponentEmoji(DiscordEmoji.FromName(Client, ":track_next:"));
+                    var nextButton = new DiscordButtonComponent(ButtonStyle.Primary, "nextButton", "Next", false, nextEmoji);
+
+                    //Send the new image as a response to the button press, replacing the previous image
+
+                    var imageMessage = new DiscordMessageBuilder()
+                        .AddEmbed(new DiscordEmbedBuilder()
+                        .WithColor(DiscordColor.Azure)
+                        .WithTitle("Results")
+                        .WithImageUrl(imageURL)
+                        .WithFooter("Page " + ImageIDCounter)
+                        )
+                        .AddComponents(previousButton, nextButton);
+                    await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().AddEmbed(imageMessage.Embed).AddComponents(imageMessage.Components));
+
+                    break;
+
+                case "nextButton":
+                    ImageIDCounter++; //Same idea but this time you increment the counter by 1 to get the next image
+                    string imageURL1 = Program.imageHandler.GetImageAtId(ImageIDCounter);
+
+                    var previousEmoji1 = new DiscordComponentEmoji(DiscordEmoji.FromName(Client, ":track_previous:"));
+                    var previousButton1 = new DiscordButtonComponent(ButtonStyle.Primary, "previousButton", "Previous", false, previousEmoji1);
+
+                    var nextEmoji1 = new DiscordComponentEmoji(DiscordEmoji.FromName(Client, ":track_next:"));
+                    var nextButton1 = new DiscordButtonComponent(ButtonStyle.Primary, "nextButton", "Next", false, nextEmoji1);
+
+                    var imageMessage1 = new DiscordMessageBuilder()
+                        .AddEmbed(new DiscordEmbedBuilder()
+                        .WithColor(DiscordColor.Azure)
+                        .WithTitle("Results")
+                        .WithImageUrl(imageURL1)
+                        .WithFooter("Page " + ImageIDCounter)
+                        )
+                        .AddComponents(previousButton1, nextButton1);
+                    await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().AddEmbed(imageMessage1.Embed).AddComponents(imageMessage1.Components));
+
+                    break;
+
+                default:
+                    Console.WriteLine("No Buttons were found with this ID");
+                    break;
             }
         }
 
