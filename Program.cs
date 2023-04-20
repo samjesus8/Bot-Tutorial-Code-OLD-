@@ -8,6 +8,7 @@ using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using YouTubeTestBot.Commands;
@@ -84,6 +85,7 @@ namespace YouTubeTestBot
             Commands.RegisterCommands<BasicCommands>();
             Commands.RegisterCommands<GameCommands>();
             Commands.RegisterCommands<UserRequestedCommands>();
+            Commands.RegisterCommands<DiscordComponentExamples>();
 
             //Slash Commands
             slashCommandsConfig.RegisterCommands<FunSL>();
@@ -96,7 +98,10 @@ namespace YouTubeTestBot
             await Client.ConnectAsync();
 
             ulong channelIdToNotify = 123456789; // your Discord channel ID
-            await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
+
+            //Remove comments on below line if you need the YouTube notifier to run
+            //await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
+
             await Task.Delay(-1);
         }
 
@@ -124,10 +129,38 @@ namespace YouTubeTestBot
 
         private static async Task ButtonPressResponse(DiscordClient sender, ComponentInteractionCreateEventArgs e)
         {
+            //Drop-Down Lists
+            if (e.Id == "dropDown1")
+            {
+                var options = e.Values;
+                foreach (var option in options)
+                {
+                    switch (option)
+                    {
+                        case "option1":
+                            await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You selected Option1"));
+                            break;
+
+                        case "option2":
+                            await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You selected Option2"));
+                            break;
+
+                        case "option3":
+                            await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You selected Option3"));
+                            break;
+
+                        default:
+                            Console.WriteLine("Error in Interaction Event Handler");
+                            break;
+                    }
+                }
+            }
+
+            //Buttons
             switch (e.Interaction.Data.CustomId)
             {
                 case "1":
-                    await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("You pressed the 1st Button"));
+                    await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("You pressed the 1st Button"));
                     break;
 
                 case "2":
