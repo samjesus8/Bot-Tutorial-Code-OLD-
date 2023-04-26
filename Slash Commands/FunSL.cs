@@ -174,5 +174,16 @@ namespace YouTubeTestBot.Slash_Commands
                 await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(fail));
             }
         }
+
+        [SlashCommand("modal", "Show a modal")]
+        public async Task Modal(InteractionContext ctx)
+        {
+            var modal = new DiscordInteractionResponseBuilder()
+                .WithTitle("Test Modal")
+                .WithCustomId("modal")
+                .AddComponents(new TextInputComponent("Random", "randomTextBox", "Type something here"));
+
+            await ctx.CreateResponseAsync(InteractionResponseType.Modal, modal);
+        }
     }
 }

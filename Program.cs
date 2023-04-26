@@ -65,8 +65,9 @@ namespace YouTubeTestBot
 
             //EVENT HANDLERS
             Client.Ready += OnClientReady;
-            Client.ComponentInteractionCreated += ButtonPressResponse;
+            Client.ComponentInteractionCreated += InteractionEventHandler;
             Client.MessageCreated += MessageSendHandler;
+            Client.ModalSubmitted += ModalEventHandler;
 
             //Setting up our Commands Configuration with our Prefix
             var commandsConfig = new CommandsNextConfiguration()
@@ -103,6 +104,15 @@ namespace YouTubeTestBot
             //await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
 
             await Task.Delay(-1);
+        }
+
+        private static async Task ModalEventHandler(DiscordClient sender, ModalSubmitEventArgs e)
+        {
+            if (e.Interaction.Type == InteractionType.ModalSubmit)
+            {
+                var values = e.Values;
+                await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent($"{e.Interaction.User.Username} submitted a modal with the input {values.Values.First()}"));
+            }
         }
 
         private static async Task MessageSendHandler(DiscordClient sender, MessageCreateEventArgs e)

@@ -60,7 +60,7 @@ namespace YouTubeTestBot.Commands
         [RequireRoles(RoleCheckMode.MatchNames, "Enter Your Roles Here")]
 
         //Restricting a Command to specific permissions
-        [RequireBotPermissions(DSharpPlus.Permissions.Administrator, true)]
+        [RequireBotPermissions(Permissions.Administrator, true)]
 
         //Restricting a Command to Owner
         [RequireOwner]
