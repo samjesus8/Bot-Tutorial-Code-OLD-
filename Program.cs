@@ -86,7 +86,7 @@ namespace YouTubeTestBot
             Commands.RegisterCommands<BasicCommands>();
             Commands.RegisterCommands<GameCommands>();
             Commands.RegisterCommands<UserRequestedCommands>();
-            Commands.RegisterCommands<DiscordComponentExamples>();
+            Commands.RegisterCommands<DiscordComponentCommands>();
 
             //Slash Commands
             slashCommandsConfig.RegisterCommands<FunSL>();
@@ -99,10 +99,7 @@ namespace YouTubeTestBot
             await Client.ConnectAsync();
 
             ulong channelIdToNotify = 123456789; // your Discord channel ID
-
-            //Remove comments on below line if you need the YouTube notifier to run
-            //await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
-
+            await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
             await Task.Delay(-1);
         }
 
@@ -137,10 +134,52 @@ namespace YouTubeTestBot
             }
         }
 
-        private static async Task ButtonPressResponse(DiscordClient sender, ComponentInteractionCreateEventArgs e)
+        private static async Task InteractionEventHandler(DiscordClient sender, ComponentInteractionCreateEventArgs e)
         {
-            //Drop-Down Lists
-            if (e.Id == "dropDown1")
+            //Drop-Down Events
+            if (e.Id == "dropDownList" && e.Interaction.Data.ComponentType == ComponentType.StringSelect)
+            {
+                var options = e.Values;
+                foreach (var option in options)
+                {
+                    switch (option)
+                    {
+                        case "option1":
+                            await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent($"{e.User.Username} has selected Option 1"));
+                            break;
+
+                        case "option2":
+                            await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent($"{e.User.Username} has selected Option 2"));
+                            break;
+
+                        case "option3":
+                            await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent($"{e.User.Username} has selected Option 3"));
+                            break;
+                    }
+                }
+            }
+            else if (e.Id == "channelDropDownList")
+            {
+                var options = e.Values;
+                foreach (var channel in options)
+                {
+                    var selectedChannel = await Client.GetChannelAsync(ulong.Parse(channel));
+                    await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent($"{e.User.Username} selected the channel with name {selectedChannel.Name}"));
+                }
+            }
+
+            else if (e.Id == "mentionDropDownList")
+            {
+                var options = e.Values;
+                foreach (var user in options)
+                {
+                    var selectedUser = await Client.GetUserAsync(ulong.Parse(user));
+                    await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent($"{selectedUser.Mention} was mentionned"));
+                }
+            }
+
+            //Button Events
+            if (e.Interaction.Data.CustomId == "1")
             {
                 var options = e.Values;
                 foreach (var option in options)
