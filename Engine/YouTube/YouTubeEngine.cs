@@ -8,7 +8,6 @@ namespace YouTubeTestBot.Engine.YouTube
     {
         public string channelId = "Channel-ID-Here";
         public string apiKey = "API-Key-Here";
-        public YouTubeVideo _video = new YouTubeVideo();
 
         public YouTubeVideo GetLatestVideo(string channelId, string apiKey)
         {

@@ -16,6 +16,7 @@ namespace YouTubeTestBot.Commands
         [Description("Searches Google Images for the given query.")]
         public async Task ImageSearch(CommandContext ctx, [RemainingText] string query)
         {
+            //Clearing the dictionary so we can populate it with new images
             Program.imageHandler.images.Clear();
             int IDCount = 0;
 
@@ -45,12 +46,14 @@ namespace YouTubeTestBot.Commands
             var search = await listRequest.ExecuteAsync();
             var results = search.Items;
 
+            //Foreach through the results and add each image link into the dictionary
             foreach (var result in results)
             {
                 Program.imageHandler.images.Add(IDCount, result.Link);
                 IDCount++;
             }
 
+            //If there are no results, then display a error message, else show the images
             if (results == null || !results.Any())
             {
                 await ctx.RespondAsync("No results found.");
@@ -67,12 +70,12 @@ namespace YouTubeTestBot.Commands
 
                 //Display the First Result
                 var firstResult = results.First();
+
                 var imageMessage = new DiscordMessageBuilder()
                     .AddEmbed(new DiscordEmbedBuilder()
-                    .WithColor(DiscordColor.Azure)
-                    .WithTitle("Results for: " + query)
-                    .WithImageUrl(firstResult.Link)
-                    )
+                        .WithColor(DiscordColor.Azure)
+                        .WithTitle("Results for: " + query)
+                        .WithImageUrl(firstResult.Link))
                     .AddComponents(previousButton, nextButton);
 
                 await ctx.Channel.SendMessageAsync(imageMessage);

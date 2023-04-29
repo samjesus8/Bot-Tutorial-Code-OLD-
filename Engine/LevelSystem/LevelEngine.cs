@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -114,7 +113,7 @@ namespace YouTubeTestBot.Engine.LevelSystem
         }
     }
 
-    class LevelJSONFile
+    internal sealed class LevelJSONFile
     {
         public string userInfo { get; set; }
         public DUser[] members { get; set; }

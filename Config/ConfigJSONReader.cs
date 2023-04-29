@@ -7,16 +7,19 @@ namespace YouTubeTestBot.Config
 {
     public class ConfigJSONReader
     {
+        //Declare our Token & Prefix properties of this class
         public string discordToken { get; set; }
         public string discordPrefix { get; set; }
 
-        public async Task ReadJSON()
+        public async Task ReadJSON() //This method must be run asynchronously
         {
             using (StreamReader sr = new StreamReader("config.json", new UTF8Encoding(false)))
             {
+                //Read and then De-Serealize the config.json file
                 string json = await sr.ReadToEndAsync();
                 JSONStruct obj = JsonConvert.DeserializeObject<JSONStruct>(json);
 
+                //Set our properties
                 this.discordToken = obj.token;
                 this.discordPrefix = obj.prefix;
             }

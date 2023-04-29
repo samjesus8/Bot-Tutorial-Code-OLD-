@@ -13,21 +13,12 @@ namespace YouTubeTestBot.Commands
         [Cooldown(5, 10, CooldownBucketType.User)]
         public async Task TestCommand(CommandContext ctx)
         {
-            await ctx.Channel.SendMessageAsync("@𝕤𝕒𝕞.𝕛𝕖𝕤𝕦𝕤𝟠#6825");
+            await ctx.Channel.SendMessageAsync("Test Message");
         }
 
         [Command("embedmessage1")]
         public async Task SendEmbedMessage2(CommandContext ctx) //Example 1
         {
-            var fieldEmbed = new DiscordMessageBuilder()
-                .AddEmbed(new DiscordEmbedBuilder()
-                    .AddField("Field1", "This is a field", true)
-                    .AddField("Field2", "This is a field", true)
-                    .AddField("Field3", "This is a field", true)
-                    .AddField("Field4", "This is a field", true)
-                    .WithColor(DiscordColor.Azure)
-                );
-
             var embedMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
                     .WithColor(DiscordColor.Azure)
@@ -35,7 +26,6 @@ namespace YouTubeTestBot.Commands
                     .WithDescription("This is a description")
                 );
 
-            await ctx.Channel.SendMessageAsync(fieldEmbed);
             await ctx.Channel.SendMessageAsync(embedMessage);
         }
 
@@ -66,14 +56,16 @@ namespace YouTubeTestBot.Commands
         [RequireOwner]
         public async Task CommandRestrictionExamples(CommandContext ctx) 
         {
+            await ctx.Channel.SendMessageAsync("Restrictions");
+
             //Restricting a Command by Server
-            if (ctx.Guild.Id == 1015010557591572560) 
+            if (ctx.Guild.Id == 123456789) 
             {
                 //Your Server ID can be found by right-clicking on your Server Icon and clicking "Copy ID"
             }
 
             //Restricting a Command by Channel
-            if (ctx.Channel.Id == 1017524740610592808) 
+            if (ctx.Channel.Id == 123456789) 
             {
                 //Right click on the channel you want this command ONLY to execute and click "Copy ID"
             }
