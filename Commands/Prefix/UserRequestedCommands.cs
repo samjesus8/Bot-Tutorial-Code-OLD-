@@ -8,7 +8,7 @@ using OpenAI_API;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace YouTubeTestBot.Commands
+namespace YouTubeTestBot.Commands.Prefix
 {
     public class UserRequestedCommands : BaseCommandModule
     {

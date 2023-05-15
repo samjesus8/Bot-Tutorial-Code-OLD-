@@ -5,7 +5,7 @@ using DSharpPlus.SlashCommands;
 using System;
 using System.Threading.Tasks;
 
-namespace YouTubeTestBot.Slash_Commands
+namespace YouTubeTestBot.Commands.Slash_Commands
 {
     public class FunSL : ApplicationCommandModule
     {

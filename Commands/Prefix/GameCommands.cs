@@ -6,7 +6,7 @@ using System;
 using System.Threading.Tasks;
 using YouTubeTestBot.Engine.External_Classes;
 
-namespace YouTubeTestBot.Commands
+namespace YouTubeTestBot.Commands.Prefix
 {
     public class GameCommands : BaseCommandModule
     {

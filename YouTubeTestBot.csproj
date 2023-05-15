@@ -33,20 +33,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ConcurrentCollections, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\ConcurrentHashSet.1.1.0\lib\net461\ConcurrentCollections.dll</HintPath>
+    <Reference Include="ConcurrentCollections, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ConcurrentHashSet.1.3.0\lib\net461\ConcurrentCollections.dll</HintPath>
     </Reference>
-    <Reference Include="DSharpPlus, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DSharpPlus.4.3.0\lib\netstandard2.0\DSharpPlus.dll</HintPath>
+    <Reference Include="DSharpPlus, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DSharpPlus.4.4.0\lib\netstandard2.0\DSharpPlus.dll</HintPath>
     </Reference>
-    <Reference Include="DSharpPlus.CommandsNext, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DSharpPlus.CommandsNext.4.3.0\lib\netstandard2.0\DSharpPlus.CommandsNext.dll</HintPath>
+    <Reference Include="DSharpPlus.CommandsNext, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DSharpPlus.CommandsNext.4.4.0\lib\netstandard2.0\DSharpPlus.CommandsNext.dll</HintPath>
     </Reference>
-    <Reference Include="DSharpPlus.Interactivity, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DSharpPlus.Interactivity.4.3.0\lib\netstandard2.0\DSharpPlus.Interactivity.dll</HintPath>
+    <Reference Include="DSharpPlus.Interactivity, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DSharpPlus.Interactivity.4.4.0\lib\netstandard2.0\DSharpPlus.Interactivity.dll</HintPath>
     </Reference>
-    <Reference Include="DSharpPlus.SlashCommands, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DSharpPlus.SlashCommands.4.3.0\lib\netstandard2.0\DSharpPlus.SlashCommands.dll</HintPath>
+    <Reference Include="DSharpPlus.Lavalink, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DSharpPlus.Lavalink.4.4.0\lib\netstandard2.0\DSharpPlus.Lavalink.dll</HintPath>
+    </Reference>
+    <Reference Include="DSharpPlus.SlashCommands, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DSharpPlus.SlashCommands.4.4.0\lib\netstandard2.0\DSharpPlus.SlashCommands.dll</HintPath>
     </Reference>
     <Reference Include="Emzi0767.Common, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Emzi0767.Common.2.6.2\lib\net45\Emzi0767.Common.dll</HintPath>
@@ -94,8 +97,8 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Collections.Immutable, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Collections.Immutable.5.0.0\lib\net461\System.Collections.Immutable.dll</HintPath>
+    <Reference Include="System.Collections.Immutable, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Collections.Immutable.7.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -104,8 +107,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
@@ -131,8 +134,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
@@ -175,10 +178,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\BasicCommands.cs" />
-    <Compile Include="Commands\DiscordComponentCommands.cs" />
-    <Compile Include="Commands\GameCommands.cs" />
-    <Compile Include="Commands\UserRequestedCommands.cs" />
+    <Compile Include="Commands\Prefix\BasicCommands.cs" />
+    <Compile Include="Commands\Prefix\DiscordComponentCommands.cs" />
+    <Compile Include="Commands\Prefix\GameCommands.cs" />
+    <Compile Include="Commands\Prefix\MusicCommands.cs" />
+    <Compile Include="Commands\Prefix\UserRequestedCommands.cs" />
     <Compile Include="Config\ConfigJSONReader.cs" />
     <Compile Include="Engine\External Classes\CardBuilder.cs" />
     <Compile Include="Engine\ImageHandler\GoogleImageHandler.cs" />
@@ -186,8 +190,8 @@
     <Compile Include="Engine\LevelSystem\LevelEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Slash Commands\FunSL.cs" />
-    <Compile Include="Slash Commands\ModerationSL.cs" />
+    <Compile Include="Commands\Slash Commands\FunSL.cs" />
+    <Compile Include="Commands\Slash Commands\ModerationSL.cs" />
     <Compile Include="Engine\YouTube\YouTubeEngine.cs" />
     <Compile Include="Engine\YouTube\YouTubeVideo.cs" />
   </ItemGroup>
@@ -195,11 +199,16 @@
     <None Include="App.config" />
     <None Include="Config\config.json" />
     <None Include="docs\Discord_Bot_Setup.md" />
-    <None Include="docs\index.md" />
     <None Include="Engine\LevelSystem\UserInfo.json" />
     <None Include="packages.config" />
     <None Include="_config.yml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="docs\index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="docs\CSS\" />
+    <Folder Include="docs\Pages\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

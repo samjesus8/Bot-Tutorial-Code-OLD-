@@ -1,3 +1,0 @@
-﻿# Index
-
-Start of Page

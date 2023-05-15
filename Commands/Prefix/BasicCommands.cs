@@ -5,7 +5,7 @@ using DSharpPlus.Entities;
 using System.Threading.Tasks;
 using YouTubeTestBot.Engine.LevelSystem;
 
-namespace YouTubeTestBot.Commands
+namespace YouTubeTestBot.Commands.Prefix
 {
     public class BasicCommands : BaseCommandModule
     {

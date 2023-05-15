@@ -6,17 +6,19 @@ using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
+using DSharpPlus.Lavalink;
+using DSharpPlus.Net;
 using DSharpPlus.SlashCommands;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
-using YouTubeTestBot.Commands;
+using YouTubeTestBot.Commands.Prefix;
+using YouTubeTestBot.Commands.Slash_Commands;
 using YouTubeTestBot.Config;
 using YouTubeTestBot.Engine.ImageHandler;
 using YouTubeTestBot.Engine.LevelSystem;
 using YouTubeTestBot.Engine.YouTube;
-using YouTubeTestBot.Slash_Commands;
 
 namespace YouTubeTestBot
 {
@@ -24,7 +26,6 @@ namespace YouTubeTestBot
     {
         //Main Discord Properties
         private static DiscordClient Client { get; set; }
-        private static InteractivityExtension Interactivity { get; set; }
         private static CommandsNextExtension Commands { get; set; }
 
         //YouTube Properties
@@ -95,8 +96,26 @@ namespace YouTubeTestBot
             //ERROR EVENT HANDLERS
             Commands.CommandErrored += OnCommandError;
 
+            //Lavalink Configuration
+            var endpoint = new ConnectionEndpoint
+            {
+                Hostname = "lavalink.devamop.in",
+                Port = 443,
+                Secured = true
+            };
+
+            var lavalinkConfig = new LavalinkConfiguration
+            {
+                Password = "DevamOP",
+                RestEndpoint = endpoint,
+                SocketEndpoint = endpoint
+            };
+
+            var lavalink = Client.UseLavalink();
+
             //Connect to the Client and get the Bot online
             await Client.ConnectAsync();
+            await lavalink.ConnectAsync(lavalinkConfig);
 
             ulong channelIdToNotify = 123456789; // your Discord channel ID
             await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
