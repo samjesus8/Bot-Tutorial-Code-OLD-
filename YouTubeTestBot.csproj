@@ -198,17 +198,27 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Config\config.json" />
-    <None Include="docs\Discord_Bot_Setup.md" />
     <None Include="Engine\LevelSystem\UserInfo.json" />
     <None Include="packages.config" />
     <None Include="_config.yml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="docs\CSS\main.css" />
+    <Content Include="docs\CSS\setup_page.css" />
     <Content Include="docs\index.html" />
+    <Content Include="docs\Pages\help.html" />
+    <Content Include="docs\Pages\setup.html" />
+    <Content Include="docs\Resources\bot_logo.png" />
+    <Content Include="docs\Resources\dark.jpg" />
+    <Content Include="docs\Resources\github_template.png" />
+    <Content Include="docs\Resources\Setup_Photos\bot_startup.png" />
+    <Content Include="docs\Resources\Setup_Photos\build_solution.png" />
+    <Content Include="docs\Resources\Setup_Photos\discord_token.png" />
+    <Content Include="docs\Resources\Setup_Photos\folder_solution.png" />
+    <Content Include="docs\Resources\Setup_Photos\github_clone.png" />
+    <Content Include="docs\Resources\Setup_Photos\build.jpg" />
+    <Content Include="docs\Resources\yt_playlist.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="docs\CSS\" />
-    <Folder Include="docs\Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

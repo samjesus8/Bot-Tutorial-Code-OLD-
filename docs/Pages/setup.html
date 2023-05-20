@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Repository Setup</title>
+    <link rel="stylesheet" href="../CSS/setup_page.css" />
+    <link rel="icon" type="image/x-icon" href="../Resources/bot_logo.png" />
+
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="#">Repo Setup</a></li>
+            <li><a href="help.html">Help & Support</a></li>
+        </ul>
+    </nav>
+
+    <h1>Cloning & Setting up this Repository</h1>
+    <h2>Cloning in VS 2022</h2>
+    <p>If you would like to test out all the commands & features that are shown in the tutorials, you can clone <br /> this
+       repository in your preferred IDE and run the Bot on your own system. <br /> <br /> </p>
+    <h3>1.   First, start by cloning the repository to your computer:</h3>
+
+    <center><img src="../Resources/Setup_Photos/github_clone.png" style="border:5px solid black" /></center>
+
+    <h2>Setting up the config.json file</h2>
+    <p>Next, we need to import the NuGet Packages (DSharpPlus) in this solution & we also need to input in our Token and Prefix into the "config.json" file</p>
+    
+    <h3>2.  Build the Solution to import the NuGet Packages</h3>
+    <center><img src="../Resources/Setup_Photos/build.jpg" style="border:5px solid black" /></center>
+
+    <p>You should get <b>1 Succeeded</b> in the output, and if you check your solution in the file explorer, you should have a <b>"../bin/Debug"</b> Folder <br />
+       which is actually the folder that contains your application when you click <b>Start</b>. There should also be dll files which should be the DSharpPlus packages that were imported</p>
+    <center><img src="../Resources/Setup_Photos/build_solution.png" style="border:5px solid black" /></center>
+    <center><img src="../Resources/Setup_Photos/folder_solution.png" style="border:5px solid black" /></center>
+
+    <h3>3.  Setup the config.json file with a Token & Prefix for your Bot</h3>
+    <p>Once you have imported the packages, the next step is to open the <b>config.json</b> file to add in your Token & Prefix <br />
+       You can get a token by going into the <b>Discord Developer Portal</b>. <br /> <br />
+       <b>PLEASE READ:</b> You must take this config.json file and COPY it over to the <b>/bin/Debug</b> folder as shown in the photo above</p>
+    <center><img src="../Resources/Setup_Photos/discord_token.png" style="border:5px solid black" /></center>
+
+    <h3>4.  Start up the Bot</h3>
+    <p>Once you have imported the NuGet packages and setup the Token/Prefix of the Bot, it is now ready to start. Click start at the top to begin execution of the Bot <br />
+       You should get a message with the version of DSharpPlus you are running and your Bot should come online</p>
+    <center><img src="../Resources/Setup_Photos/bot_startup.png" style="border:5px solid black" /></center>
+
+    <footer>
+        <h1>Copyright © 2023 Samuel Jesuthas</h1>
+    </footer>
+</body>
+</html>

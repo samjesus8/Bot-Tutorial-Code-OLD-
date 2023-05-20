@@ -1,0 +1,59 @@
+﻿ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: dimgrey;
+    position: sticky;
+}
+
+li {
+    display: inline;
+    float: left;
+    border-right: solid;
+    font-family: 'Cascadia Mono';
+}
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+        li a:hover {
+            background-color: royalblue;
+        }
+
+h1{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+}
+
+h2 {
+    font-family: 'Segoe UI';
+    color: white;
+}
+
+h3 {
+    font-family: 'Cascadia Mono';
+    text-align: center;
+    color: white;
+}
+
+p {
+    font-family: 'Segoe UI';
+    color: white;
+    font-size: 18px;
+}
+
+body{
+    background-image: url('../Resources/dark.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+a{
+    color: lawngreen;
+}
