@@ -10,7 +10,9 @@ using DSharpPlus.Lavalink;
 using DSharpPlus.Net;
 using DSharpPlus.SlashCommands;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using System.Timers;
 using YouTubeTestBot.Commands.Prefix;
@@ -36,6 +38,7 @@ namespace YouTubeTestBot
         //Miscaleneous Properties
         private static int ImageIDCounter = 0;
         public static GoogleImageHandler imageHandler;
+        private static Dictionary<string, ulong> voiceChannelIDs = new Dictionary<string, ulong>();
 
         static async Task Main(string[] args)
         {
@@ -69,6 +72,7 @@ namespace YouTubeTestBot
             Client.ComponentInteractionCreated += InteractionEventHandler;
             Client.MessageCreated += MessageSendHandler;
             Client.ModalSubmitted += ModalEventHandler;
+            Client.VoiceStateUpdated += VoiceChannelHandler;
 
             //Setting up our Commands Configuration with our Prefix
             var commandsConfig = new CommandsNextConfiguration()
@@ -120,6 +124,31 @@ namespace YouTubeTestBot
             ulong channelIdToNotify = 123456789; // your Discord channel ID
             await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
             await Task.Delay(-1);
+        }
+
+        private static async Task VoiceChannelHandler(DiscordClient sender, VoiceStateUpdateEventArgs e)
+        {
+            var channel = e.Channel;
+            if (channel != null && channel.Name == "Create" && e.Before == null) //Joining a VC
+            {
+                Console.WriteLine($"Joined VC {channel.Name}");
+
+                //Creating the VC
+                var userVC = await e.Guild.CreateVoiceChannelAsync($"{e.User.Username}'s Channel", e.Channel.Parent);
+                voiceChannelIDs.Add(e.User.Username, userVC.Id);
+
+                var member = await e.Guild.GetMemberAsync(e.User.Id);
+                await member.ModifyAsync(x => x.VoiceChannel = userVC);
+            }
+            if (channel == null && e.Before != null && e.Before.Channel != null && e.Before.Channel.Name == $"{e.User.Username}'s Channel") //Leaving the VC
+            {
+                Console.WriteLine($"Left the VC {e.Before.Channel.Name}");
+                var channelID = voiceChannelIDs.TryGetValue(e.User.Username, out ulong channelToDelete);
+                var leftChannel = e.Guild.GetChannel(channelToDelete);
+                await leftChannel.DeleteAsync();
+
+                voiceChannelIDs.Remove(e.User.Username);
+            }
         }
 
         private static async Task ModalEventHandler(DiscordClient sender, ModalSubmitEventArgs e)
