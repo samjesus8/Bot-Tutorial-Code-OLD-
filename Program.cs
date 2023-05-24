@@ -12,12 +12,12 @@ using DSharpPlus.SlashCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using System.Timers;
 using YouTubeTestBot.Commands.Prefix;
 using YouTubeTestBot.Commands.Slash_Commands;
 using YouTubeTestBot.Config;
+using YouTubeTestBot.Engine;
 using YouTubeTestBot.Engine.ImageHandler;
 using YouTubeTestBot.Engine.LevelSystem;
 using YouTubeTestBot.Engine.YouTube;
@@ -178,11 +178,24 @@ namespace YouTubeTestBot
 
         private static async Task MessageSendHandler(DiscordClient sender, MessageCreateEventArgs e)
         {
+            //Swear Filter
+            var swearFilter = new SwearFilter();
+            foreach (var word in swearFilter.filter)
+            {
+                if (e.Message.Content.Contains(word))
+                {
+                    await e.Message.DeleteAsync();
+                    await e.Channel.SendMessageAsync("That message had a swear word in it, you have been warned");
+                }
+            }
+
+            //Image Counter Reset
             if (e.Message.Content == "!image")
             {
                 ImageIDCounter = 0; //Reset the counter when someone uses this command
             }
 
+            //Profile System
             var levelEngine = new LevelEngine();
             var addedXP = levelEngine.AddXP(e.Author.Username, e.Guild.Id);
             if (levelEngine.levelledUp == true)

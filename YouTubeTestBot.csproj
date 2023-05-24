@@ -188,6 +188,7 @@
     <Compile Include="Engine\ImageHandler\GoogleImageHandler.cs" />
     <Compile Include="Engine\LevelSystem\DUser.cs" />
     <Compile Include="Engine\LevelSystem\LevelEngine.cs" />
+    <Compile Include="Engine\SwearFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\Slash Commands\FunSL.cs" />
