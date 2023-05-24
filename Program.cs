@@ -184,7 +184,6 @@ namespace YouTubeTestBot
             {
                 if (e.Message.Content.Contains(word))
                 {
-                    await e.Message.DeleteAsync();
                     await e.Channel.SendMessageAsync("That message had a swear word in it, you have been warned");
                 }
             }
