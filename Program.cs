@@ -73,6 +73,7 @@ namespace YouTubeTestBot
             Client.MessageCreated += MessageSendHandler;
             Client.ModalSubmitted += ModalEventHandler;
             Client.VoiceStateUpdated += VoiceChannelHandler;
+            Client.GuildMemberAdded += UserJoinHandler;
 
             //Setting up our Commands Configuration with our Prefix
             var commandsConfig = new CommandsNextConfiguration()
@@ -126,9 +127,24 @@ namespace YouTubeTestBot
             await Task.Delay(-1);
         }
 
+        private static async Task UserJoinHandler(DiscordClient sender, GuildMemberAddEventArgs e)
+        {
+            var defaultChannel = e.Guild.GetDefaultChannel();
+
+            var welcomeEmbed = new DiscordEmbedBuilder()
+            {
+                Color = DiscordColor.Gold,
+                Title = $"Welcome {e.Member.Username} to the server",
+                Description = "Hope you enjoy your stay, please read the rules"
+            };
+
+            await defaultChannel.SendMessageAsync(embed: welcomeEmbed);
+        }
+
         private static async Task VoiceChannelHandler(DiscordClient sender, VoiceStateUpdateEventArgs e)
         {
             var channel = e.Channel;
+            var mainUserName = e.User.Username;
             if (channel != null && channel.Name == "Create" && e.Before == null) //Joining a VC
             {
                 Console.WriteLine($"Joined VC {channel.Name}");
@@ -140,7 +156,7 @@ namespace YouTubeTestBot
                 var member = await e.Guild.GetMemberAsync(e.User.Id);
                 await member.ModifyAsync(x => x.VoiceChannel = userVC);
             }
-            if (channel == null && e.Before != null && e.Before.Channel != null && e.Before.Channel.Name == $"{e.User.Username}'s Channel") //Leaving the VC
+            if (e.User.Username == mainUserName && channel == null && e.Before != null && e.Before.Channel != null && e.Before.Channel.Name == $"{e.User.Username}'s Channel") //Leaving the VC
             {
                 Console.WriteLine($"Left the VC {e.Before.Channel.Name}");
                 var channelID = voiceChannelIDs.TryGetValue(e.User.Username, out ulong channelToDelete);
