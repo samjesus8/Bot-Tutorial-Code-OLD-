@@ -93,6 +93,7 @@ namespace YouTubeTestBot
             Commands.RegisterCommands<GameCommands>();
             Commands.RegisterCommands<UserRequestedCommands>();
             Commands.RegisterCommands<DiscordComponentCommands>();
+            Commands.RegisterCommands<MusicCommands>();
 
             //Slash Commands
             slashCommandsConfig.RegisterCommands<FunSL>();
