@@ -36,44 +36,44 @@
     <Reference Include="ConcurrentCollections, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\ConcurrentHashSet.1.3.0\lib\net461\ConcurrentCollections.dll</HintPath>
     </Reference>
-    <Reference Include="DSharpPlus, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DSharpPlus.4.4.0\lib\netstandard2.0\DSharpPlus.dll</HintPath>
+    <Reference Include="DSharpPlus, Version=4.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DSharpPlus.4.4.2\lib\netstandard2.0\DSharpPlus.dll</HintPath>
     </Reference>
-    <Reference Include="DSharpPlus.CommandsNext, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DSharpPlus.CommandsNext.4.4.0\lib\netstandard2.0\DSharpPlus.CommandsNext.dll</HintPath>
+    <Reference Include="DSharpPlus.CommandsNext, Version=4.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DSharpPlus.CommandsNext.4.4.2\lib\netstandard2.0\DSharpPlus.CommandsNext.dll</HintPath>
     </Reference>
-    <Reference Include="DSharpPlus.Interactivity, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DSharpPlus.Interactivity.4.4.0\lib\netstandard2.0\DSharpPlus.Interactivity.dll</HintPath>
+    <Reference Include="DSharpPlus.Interactivity, Version=4.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DSharpPlus.Interactivity.4.4.2\lib\netstandard2.0\DSharpPlus.Interactivity.dll</HintPath>
     </Reference>
-    <Reference Include="DSharpPlus.Lavalink, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DSharpPlus.Lavalink.4.4.0\lib\netstandard2.0\DSharpPlus.Lavalink.dll</HintPath>
+    <Reference Include="DSharpPlus.Lavalink, Version=4.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DSharpPlus.Lavalink.4.4.2\lib\netstandard2.0\DSharpPlus.Lavalink.dll</HintPath>
     </Reference>
-    <Reference Include="DSharpPlus.SlashCommands, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DSharpPlus.SlashCommands.4.4.0\lib\netstandard2.0\DSharpPlus.SlashCommands.dll</HintPath>
+    <Reference Include="DSharpPlus.SlashCommands, Version=4.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DSharpPlus.SlashCommands.4.4.2\lib\netstandard2.0\DSharpPlus.SlashCommands.dll</HintPath>
     </Reference>
     <Reference Include="Emzi0767.Common, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Emzi0767.Common.2.6.2\lib\net45\Emzi0767.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis, Version=1.60.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.1.60.0\lib\net45\Google.Apis.dll</HintPath>
+    <Reference Include="Google.Apis, Version=1.61.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.61.0\lib\net45\Google.Apis.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Auth, Version=1.60.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.Auth.1.60.0\lib\net461\Google.Apis.Auth.dll</HintPath>
+    <Reference Include="Google.Apis.Auth, Version=1.61.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.61.0\lib\net461\Google.Apis.Auth.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.60.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.Auth.1.60.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.61.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.61.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Core, Version=1.60.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.Core.1.60.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    <Reference Include="Google.Apis.Core, Version=1.61.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Core.1.61.0\lib\net45\Google.Apis.Core.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis.Customsearch.v1, Version=1.49.0.2084, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>packages\Google.Apis.Customsearch.v1.1.49.0.2084\lib\net45\Google.Apis.Customsearch.v1.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.PlatformServices, Version=1.60.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.1.60.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.61.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.61.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.YouTube.v3, Version=1.60.0.2945, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.YouTube.v3.1.60.0.2945\lib\net45\Google.Apis.YouTube.v3.dll</HintPath>
+    <Reference Include="Google.Apis.YouTube.v3, Version=1.61.0.3106, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.YouTube.v3.1.61.0.3106\lib\net45\Google.Apis.YouTube.v3.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
