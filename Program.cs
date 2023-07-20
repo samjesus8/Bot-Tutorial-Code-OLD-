@@ -13,14 +13,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Timers;
 using YouTubeTestBot.Commands.Prefix;
 using YouTubeTestBot.Commands.Slash_Commands;
 using YouTubeTestBot.Config;
 using YouTubeTestBot.Engine;
 using YouTubeTestBot.Engine.ImageHandler;
 using YouTubeTestBot.Engine.LevelSystem;
-using YouTubeTestBot.Engine.YouTube;
 
 namespace YouTubeTestBot
 {
@@ -29,11 +27,6 @@ namespace YouTubeTestBot
         //Main Discord Properties
         private static DiscordClient Client { get; set; }
         private static CommandsNextExtension Commands { get; set; }
-
-        //YouTube Properties
-        private static YouTubeVideo _video = new YouTubeVideo();
-        private static YouTubeVideo temp = new YouTubeVideo();
-        private static YouTubeEngine _YouTubeEngine = new YouTubeEngine();
 
         //Miscaleneous Properties
         private static int ImageIDCounter = 0;
@@ -122,10 +115,12 @@ namespace YouTubeTestBot
             //Connect to the Client and get the Bot online
             await Client.ConnectAsync();
             await lavalink.ConnectAsync(lavalinkConfig);
-
-            ulong channelIdToNotify = 123456789; // your Discord channel ID
-            await StartVideoUploadNotifier(_YouTubeEngine.channelId, _YouTubeEngine.apiKey, Client, channelIdToNotify);
             await Task.Delay(-1);
+        }
+
+        private static Task OnClientReady(DiscordClient sender, ReadyEventArgs e)
+        {
+            return Task.CompletedTask;
         }
 
         private static async Task UserJoinHandler(DiscordClient sender, GuildMemberAddEventArgs e)
@@ -170,7 +165,7 @@ namespace YouTubeTestBot
 
         private static async Task ModalEventHandler(DiscordClient sender, ModalSubmitEventArgs e)
         {
-            if (e.Interaction.Type == InteractionType.ModalSubmit)
+            if (e.Interaction.Type == InteractionType.ModalSubmit && e.Interaction.Data.CustomId == "modal")
             {
                 var values = e.Values;
                 await e.Interaction.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent($"{e.Interaction.User.Username} submitted a modal with the input {values.Values.First()}"));
@@ -368,11 +363,6 @@ namespace YouTubeTestBot
             }
         }
 
-        private static Task OnClientReady(DiscordClient sender, ReadyEventArgs e)
-        {
-            return Task.CompletedTask;
-        }
-
         private static async Task OnCommandError(CommandsNextExtension sender, CommandErrorEventArgs e)
         {
             if (e.Exception is ChecksFailedException)
@@ -396,37 +386,6 @@ namespace YouTubeTestBot
 
                 await e.Context.Channel.SendMessageAsync(embed: cooldownMessage);
             }
-        }
-
-        private static async Task StartVideoUploadNotifier(string channelId, string apiKey, DiscordClient client, ulong channelIdToNotify)
-        {
-            var timer = new Timer(120000); //Timer set for 2 min
-            timer.Elapsed += async (sender, e) => {
-                _video = _YouTubeEngine.GetLatestVideo(channelId, apiKey); //Get latest video using API
-                DateTime lastCheckedAt = DateTime.Now;
-
-                if (_video != null)
-                {
-                    if (temp.videoTitle == _video.videoTitle) //This ensures that only the newest videos get sent through
-                    {
-                        Console.WriteLine("Same name");
-                    }
-                    else if (_video.PublishedAt < lastCheckedAt) //If the new video is actually new
-                    {
-                        var message = $"NEW VIDEO | **{_video.videoTitle}** \n" +
-                                      $"Published at: {_video.PublishedAt} \n" +
-                                      "URL: " + _video.videoUrl;
-
-                        await client.GetChannelAsync(channelIdToNotify).Result.SendMessageAsync(message);
-                        temp = _video;
-                    }
-                    else
-                    {
-                        Console.WriteLine("[" +lastCheckedAt.ToString()+ "]" + "YouTube API: No new videos were found");
-                    }
-                }
-            };
-            timer.Start();
         }
     }
 }

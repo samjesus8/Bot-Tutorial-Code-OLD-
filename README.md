@@ -16,7 +16,9 @@ There is a lot of interchange between coding in C# and learning to make a Discor
 
 [Watch the Tutorial Here](https://www.youtube.com/playlist?list=PLcpUxmcrEm_Bn4K-kcE9ebsQPvNcR8KZx)
 
-![image](https://user-images.githubusercontent.com/98812930/212710320-840b87e9-2b16-4f53-ad83-733bf28bb9be.png)
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/98812930/212710320-840b87e9-2b16-4f53-ad83-733bf28bb9be.png" style="border:5px solid black" />
+</p>
 
 ## Template Repository
 
