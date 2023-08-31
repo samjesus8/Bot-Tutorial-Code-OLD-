@@ -4,11 +4,11 @@ namespace YouTubeTestBot.Engine.External_Classes
 {
     internal class CardBuilder
     {
-        public int[] cardNumbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
-        public string[] cardSuits = { "Clubs", "Spades", "Diamonds", "Hearts" };
+        private int[] cardNumbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+        private string[] cardSuits = { "Clubs", "Spades", "Diamonds", "Hearts" };
 
-        public int SelectedNumber { get; internal set; }
-        public string SelectedCard { get; internal set; }
+        public int SelectedNumber { get; set; }
+        public string SelectedCard { get; set; }
 
         public CardBuilder() 
         {
@@ -17,7 +17,7 @@ namespace YouTubeTestBot.Engine.External_Classes
             int indexSuit = Random.Next(0, this.cardSuits.Length - 1);
 
             this.SelectedNumber = this.cardNumbers[indexNumbers];
-            this.SelectedCard = this.cardNumbers[indexNumbers] + " of " + this.cardSuits[indexSuit];
+            this.SelectedCard = $"{this.cardNumbers[indexNumbers]} of {this.cardSuits[indexSuit]}";
         }
     }
 }

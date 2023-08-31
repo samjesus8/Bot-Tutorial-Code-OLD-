@@ -25,7 +25,7 @@ namespace YouTubeTestBot
     public sealed class Program
     {
         //Main Discord Properties
-        private static DiscordClient Client { get; set; }
+        public static DiscordClient Client { get; set; }
         private static CommandsNextExtension Commands { get; set; }
 
         //Miscaleneous Properties
@@ -365,9 +365,9 @@ namespace YouTubeTestBot
 
         private static async Task OnCommandError(CommandsNextExtension sender, CommandErrorEventArgs e)
         {
-            if (e.Exception is ChecksFailedException)
+            //Casting my ErrorEventArgs as a ChecksFailedException
+            if (e.Exception is ChecksFailedException castedException)
             {
-                var castedException = (ChecksFailedException)e.Exception; //Casting my ErrorEventArgs as a ChecksFailedException
                 string cooldownTimer = string.Empty;
 
                 foreach (var check in castedException.FailedChecks)

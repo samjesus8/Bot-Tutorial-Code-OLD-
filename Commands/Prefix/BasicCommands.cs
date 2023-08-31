@@ -23,8 +23,7 @@ namespace YouTubeTestBot.Commands.Prefix
                 .AddEmbed(new DiscordEmbedBuilder()
                     .WithColor(DiscordColor.Azure)
                     .WithTitle("This is a title")
-                    .WithDescription("This is a description")
-                );
+                    .WithDescription("This is a description"));
 
             await ctx.Channel.SendMessageAsync(embedMessage);
         }
@@ -42,47 +41,6 @@ namespace YouTubeTestBot.Commands.Prefix
             await ctx.Channel.SendMessageAsync(embed: embedMessage);
         }
 
-        [Command("restrictions")]
-
-        //For any Restrictions here, make sure to register an event in your CommandErrored Method to handle this
-
-        //Restricting a Command by Roles
-        [RequireRoles(RoleCheckMode.MatchNames, "Enter Your Roles Here")]
-
-        //Restricting a Command to specific permissions
-        [RequireBotPermissions(Permissions.Administrator, true)]
-
-        //Restricting a Command to Owner
-        [RequireOwner]
-        public async Task CommandRestrictionExamples(CommandContext ctx) 
-        {
-            await ctx.Channel.SendMessageAsync("Restrictions");
-
-            //Restricting a Command by Server
-            if (ctx.Guild.Id == 123456789) 
-            {
-                //Your Server ID can be found by right-clicking on your Server Icon and clicking "Copy ID"
-            }
-
-            //Restricting a Command by Channel
-            if (ctx.Channel.Id == 123456789) 
-            {
-                //Right click on the channel you want this command ONLY to execute and click "Copy ID"
-            }
-
-            //Restricting a Command to NSFW Channels
-            if (ctx.Channel.IsNSFW == true) 
-            {
-                //You are checking if this is being executed in an NSFW channel, so your ELSE block must send an error message elsewhere
-            }
-
-            //Restricting a Command to a specific user
-            if (ctx.User.Id == 01234 || ctx.User.Username == "Enter Your Username Here") 
-            {
-                //You can check for the user by their ID or their Username
-            }
-        }
-
         [Command("help")]
         public async Task HelpCommand(CommandContext ctx) 
         {
@@ -91,11 +49,9 @@ namespace YouTubeTestBot.Commands.Prefix
 
             var helpMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-
-                .WithColor(DiscordColor.Azure)
-                .WithTitle("Help Menu")
-                .WithDescription("Please pick a button for more information on the commands")
-                )
+                    .WithColor(DiscordColor.Azure)
+                    .WithTitle("Help Menu")
+                    .WithDescription("Please pick a button for more information on the commands"))
                 .AddComponents(funButton, gameButton);
 
             await ctx.Channel.SendMessageAsync(helpMessage);

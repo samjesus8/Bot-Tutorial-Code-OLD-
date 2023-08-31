@@ -35,13 +35,13 @@ namespace YouTubeTestBot.Commands.Slash_Commands
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
                                                                                 .WithContent("..."));
 
-            var interactvity = ctx.Client.GetInteractivity(); //Getting the Interactivity Module
+            var interactvity = Program.Client.GetInteractivity(); //Getting the Interactivity Module
             TimeSpan timer = TimeSpan.FromSeconds(TimeLimit); //Converting my time parameter to a timespan variable
 
-            DiscordEmoji[] optionEmojis = { DiscordEmoji.FromName(ctx.Client, ":one:", false),
-                                            DiscordEmoji.FromName(ctx.Client, ":two:", false),
-                                            DiscordEmoji.FromName(ctx.Client, ":three:", false),
-                                            DiscordEmoji.FromName(ctx.Client, ":four:", false) }; //Array to store discord emojis
+            DiscordEmoji[] optionEmojis = { DiscordEmoji.FromName(Program.Client, ":one:", false),
+                                            DiscordEmoji.FromName(Program.Client, ":two:", false),
+                                            DiscordEmoji.FromName(Program.Client, ":three:", false),
+                                            DiscordEmoji.FromName(Program.Client, ":four:", false) }; //Array to store discord emojis
 
             string optionsString = optionEmojis[0] + " | " + Option1 + "\n" +
                                    optionEmojis[1] + " | " + Option2 + "\n" +
@@ -50,11 +50,9 @@ namespace YouTubeTestBot.Commands.Slash_Commands
 
             var pollMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-
-                .WithColor(DiscordColor.Azure)
-                .WithTitle(string.Join(" ", Question))
-                .WithDescription(optionsString)
-                ); //Making the Poll message
+                    .WithColor(DiscordColor.Azure)
+                    .WithTitle(string.Join(" ", Question))
+                    .WithDescription(optionsString)); //Making the Poll message
 
             var putReactOn = await ctx.Channel.SendMessageAsync(pollMessage); //Storing the await command in a variable
 
@@ -93,18 +91,16 @@ namespace YouTubeTestBot.Commands.Slash_Commands
             int totalVotes = count1 + count2 + count3 + count4;
 
             string resultsString = optionEmojis[0] + ": " + count1 + " Votes \n" +
-                       optionEmojis[1] + ": " + count2 + " Votes \n" +
-                       optionEmojis[2] + ": " + count3 + " Votes \n" +
-                       optionEmojis[3] + ": " + count4 + " Votes \n\n" +
-                       "The total number of votes is " + totalVotes; //String to show the results of the poll
+                                   optionEmojis[1] + ": " + count2 + " Votes \n" +
+                                   optionEmojis[2] + ": " + count3 + " Votes \n" +
+                                   optionEmojis[3] + ": " + count4 + " Votes \n\n" +
+                                   "The total number of votes is " + totalVotes; //String to show the results of the poll
 
             var resultsMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-
-                .WithColor(DiscordColor.Green)
-                .WithTitle("Results of Poll")
-                .WithDescription(resultsString)
-                );
+                    .WithColor(DiscordColor.Green)
+                    .WithTitle("Results of Poll")
+                    .WithDescription(resultsString));
 
             await ctx.Channel.SendMessageAsync(resultsMessage); //Making the embed and sending it off            
         }
