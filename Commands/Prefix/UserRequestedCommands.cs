@@ -96,7 +96,7 @@ namespace YouTubeTestBot.Commands.Prefix
             chat.AppendUserInput(string.Join(" ", message));
 
             //Get the response
-            string response = await chat.GetResponseFromChatbot();
+            string response = await chat.GetResponseFromChatbotAsync();
 
             //Show in Discord Embed Message
             var responseMsg = new DiscordEmbedBuilder()

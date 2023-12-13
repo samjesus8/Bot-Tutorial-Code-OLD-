@@ -1,22 +1,29 @@
-# C# Discord Bot | Made by Sam J
+# Example C# Discord Bot Repository
 
-![image](https://media.discordapp.net/attachments/1020110665161113610/1084826383907291167/READMETHUMB.jpg?width=1048&height=287)
+![image](https://media.discordapp.net/attachments/1020110665161113610/1151881716894543893/discord_bot_tutorial_logo_2023.png?ex=65844672&is=6571d172&hm=3fc490459b86e2d2db62539ec18185113f192879c0ac833ee6b037d34713d212&=&format=webp&quality=lossless)
 
 ## :wave: Welcome
 
-This is a C# Discord Bot coded through a series of tutorial videos. The whole point of this tutorial is to teach people how to make a Discord Bot and have fun using it in their own servers and maybe even on public servers.
+- Welcome to my **C# Discord Bot example repository**. Everything you see here can be used as a reference in order to help code your own Bot
+- This Bot was written using the **DSharpPlus** library. Please **do not** install any other Discord library as this will not work. You cannot **mix and match** multiple Discord Bot libraries in one project
 
-## :arrow_right: Follow the YouTube Tutorial
+## :arrow_right: Watch my YouTube Tutorial
 
-- This Bot is being coded in a YouTube tutorial series by SamJesus8. He will teach you every single step needed to make this a good, clean & functioning Discord Bot. Everything from Bot Setup, Commands, Games and many many different functions will be covered here in this tutorial.
-
-- This is a good insight for people wanting to code a Discord Bot, or learners who are learning C# and want to take on more complex projects. This tutorial alone will also cover a lot of C# coding tips & tricks as well as some fundamentals to coding in C# such as the use of Classes, StreamReaders, Asynchronous Logic and a lot more key components in the coding language.
+- The tutorial series, made by samjesus8, contains the fundamental learning material you need to know in order to know how DSharpPlus functions
 
 [Watch the Tutorial Here](https://www.youtube.com/playlist?list=PLcpUxmcrEm_Bn4K-kcE9ebsQPvNcR8KZx)
 
 <p align="center">
     <img src="https://media.discordapp.net/attachments/1020110665161113610/1142802011885150228/image.png" style="border:5px solid black" />
 </p>
+
+### Expectations
+
+- Before delving into the world of Discord Bots in C#, viewers are expected to:
+    - Know how to code in the C# language
+    - Know different ways on how to debug code in VS 2022
+    - Know how to research error messages and be able to come up with solutions (Problem-solving skills)
+- This is what separates amateur developers from the professional ones
 
 ## :arrow_right: Template Repository
 
