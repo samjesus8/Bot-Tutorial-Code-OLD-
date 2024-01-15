@@ -1,3 +1,10 @@
+# IMPORTANT
+
+- We have moved to a new repository called [DiscordBotExampleCode](https://github.com/samjesus8/DiscordBotExampleCode) which you can access by clicking on the highlighted link
+- Because we are revamping the current Discord Bot tutorial, we have chosen to make a brand new fresh repository for it where viewers can easily understand the example code
+- Please refer to this announcement to see more details on the revamp -> [Community Post](https://www.youtube.com/post/UgkxLdMGSqbznoy8w-_DWAYjh-x4YBTKHX3W)
+- This repository will soon be archived and will not be maintained in the future. However, users can still access the content of this repository for reference
+
 # Example C# Discord Bot Repository
 
 ![image](https://media.discordapp.net/attachments/1020110665161113610/1151881716894543893/discord_bot_tutorial_logo_2023.png?ex=65844672&is=6571d172&hm=3fc490459b86e2d2db62539ec18185113f192879c0ac833ee6b037d34713d212&=&format=webp&quality=lossless)
